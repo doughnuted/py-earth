@@ -10,23 +10,23 @@ requirements:
     - python
     - setuptools
     - cython
-    - numpy
-    - scikit-learn
-    - nose
-    - six
+    - numpy >=1.20.0
+    - scikit-learn >=1.0.0
+    - pytest
+    - pytest-cov
   run:
     - python
-    - numpy
-    - scipy
-    - scikit-learn
-    - six
+    - numpy >=1.20.0
+    - scipy >=1.6.0
+    - scikit-learn >=1.0.0
 
 test:
   requires:
-    - numpy
-    - scipy
-    - scikit-learn
-    - nose
+    - numpy >=1.20.0
+    - scipy >=1.6.0
+    - scikit-learn >=1.0.0
+    - pytest
+    - pytest-cov
   imports:
     - pyearth
 
