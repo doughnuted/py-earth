@@ -162,7 +162,7 @@ def compare(generator_class, sample_sizes, dimensions, repetitions, **kwargs):
         generator = generator_class(n=n)
         for m in sample_sizes:
             for rep in range(repetitions):
-                print n, m, rep
+                print(n, m, rep)
                 X, y = generator.generate(m=m)
                 y_pred_r, time_r, iter_r = run_earth(X, y, **kwargs)
                 rsq_r = 1 - (numpy.sum((y - y_pred_r) ** 2)) / (
@@ -187,5 +187,5 @@ if __name__ == '__main__':
         rep,
         max_degree=2,
         penalty=3.0)
-    print data
+    print(data)
     data.to_csv('comparison.csv')

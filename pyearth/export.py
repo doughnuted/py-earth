@@ -46,7 +46,7 @@ def export_sympy_term_expressions(earth_model):
       expressions are the symbolic equivalent of the Earth.transform method.
 
     """
-    from sympy import Symbol, Add, Mul, Max, RealNumber, Piecewise, Pow, And, nan, Function, Not
+    from sympy import Symbol, Add, Mul, Max, RealNumber, Piecewise, Pow, And, Function, Not
     from ._basis import LinearBasisFunction, HingeBasisFunction, SmoothedHingeBasisFunction, \
           MissingnessBasisFunction, ConstantBasisFunction, VariableBasisFunction
 

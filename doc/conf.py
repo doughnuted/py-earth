@@ -12,6 +12,7 @@
 # serve to show the default.
 import sys
 import os
+import pyearth
 
 # Automatically generate API documentation
 #os.system('sphinx-apidoc -o . ' + os.path.join('..','pyearth'))
@@ -23,7 +24,6 @@ sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath(os.path.join('..')))
 
 # Create the figures
-import generate_figures
 
 import sphinx_gallery
 
@@ -65,7 +65,7 @@ copyright = u'2013, Jason Rudy'
 # built documents.
 #
 # The short X.Y version.
-import pyearth
+# import pyearth # This will be moved to the top of the file
 version = pyearth.__version__
 # The full version, including alpha/beta/rc tags.
 release = version

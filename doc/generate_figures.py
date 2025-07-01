@@ -3,6 +3,7 @@ mpl.use('Agg')
 import numpy
 from pyearth import Earth
 from matplotlib import pyplot
+from xkcdify import XKCDify
 
 #=========================================================================
 # V-Function Example
@@ -35,7 +36,7 @@ pyplot.savefig('simple_earth_example.png')
 #=========================================================================
 # Hinge plot
 #=========================================================================
-from xkcdify import XKCDify
+# from xkcdify import XKCDify # This will be moved to the top of the file
 x = numpy.arange(-10, 10, .1)
 y = x * (x > 0)
 

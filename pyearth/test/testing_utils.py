@@ -51,7 +51,7 @@ def if_statsmodels(func):
     @wraps(func)
     def run_test(*args, **kwargs):
         try:
-            import statsmodels
+            import statsmodels  # noqa: F401
         except ImportError:
             raise SkipTest('statsmodels not available.')
         else:
@@ -65,7 +65,7 @@ def if_pandas(func):
     @wraps(func)
     def run_test(*args, **kwargs):
         try:
-            import pandas
+            import pandas  # noqa: F401
         except ImportError:
             raise SkipTest('pandas not available.')
         else:
@@ -78,7 +78,7 @@ def if_sympy(func):
     @wraps(func)
     def run_test(*args, **kwargs):
         try:
-            from sympy import Symbol, Add, Mul, Max, RealNumber, Piecewise, sympify, Pow, And, lambdify
+            from sympy import Symbol, Add, Mul, Max, RealNumber, Piecewise, sympify, Pow, And, lambdify  # noqa: F401
         except ImportError:
             raise SkipTest('sympy not available.')
         else:
@@ -93,7 +93,7 @@ def if_patsy(func):
     @wraps(func)
     def run_test(*args, **kwargs):
         try:
-            import patsy
+            import patsy  # noqa: F401
         except ImportError:
             raise SkipTest('patsy not available.')
         else:

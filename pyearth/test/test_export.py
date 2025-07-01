@@ -49,7 +49,7 @@ def test_export_python_string():
         model = Earth(penalty=1, smooth=smooth, max_degree=2).fit(X, y)
         export_model = export_python_string(model, 'my_test_model')
         exec(export_model, globals())
-        for exp_pred, model_pred in zip(model.predict(X), my_test_model(X)):
+        for exp_pred, model_pred in zip(model.predict(X), my_test_model(X)):  # noqa: F821
             assert_almost_equal(exp_pred, model_pred)
 
 @if_pandas

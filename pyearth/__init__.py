@@ -5,6 +5,8 @@ Created on Feb 16, 2013
 '''
 from .earth import Earth
 
+__all__ = ['Earth']
+
 from ._version import get_versions
 __version__ = get_versions()['version']
 del get_versions

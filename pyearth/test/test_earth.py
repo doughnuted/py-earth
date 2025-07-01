@@ -522,9 +522,9 @@ def test_feature_importance():
         assert len(earth.feature_importances_) == X.shape[1]
     earth = Earth(feature_importance_type=criteria, **default_params)
     earth.fit(X, y)
-    assert type(earth.feature_importances_) == dict
+    assert isinstance(earth.feature_importances_, dict)
     assert set(earth.feature_importances_.keys()) == set(criteria)
-    for crit, val in earth .feature_importances_.items():
+    for crit, val in earth.feature_importances_.items():
         assert len(val) == X.shape[1]
 
     assert_raises(
