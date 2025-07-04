@@ -986,7 +986,7 @@ cdef class Basis:
         cdef dict anova = self.anova_decomp()
         cdef dict intermediate = {}
         cdef dict result = {}
-        for vars, bfs in anova.iteritems():
+        for vars, bfs in anova.items():
             intermediate[vars] = {}
             for var in vars:
                 intermediate[vars][var] = []
@@ -995,8 +995,8 @@ cdef class Basis:
                     variable = bf.get_variable()
                     knot = bf.get_knot()
                     intermediate[vars][variable].append((bf, knot))
-        for d in intermediate.itervalues():
-            for var, lst in d.iteritems():
+        for d in intermediate.values():
+            for var, lst in d.items():
                 lst.sort(key=lambda x: x[1])
                 prev_minus = mins[var]
                 prev = prev_minus
