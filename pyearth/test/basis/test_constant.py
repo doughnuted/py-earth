@@ -1,7 +1,7 @@
 import pickle
 import numpy
 
-from nose.tools import assert_true, assert_false
+from ..pytest_tools import assert_true, assert_false
 
 from .base import BaseContainer
 from pyearth._types import BOOL
