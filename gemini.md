@@ -7,6 +7,8 @@ This document outlines the roadmap for modernizing the `py-earth` library, rebra
 - **2025-06-30:** Project roadmap created and initialized in `gemini.md`.
 - **2025-06-30:** Fixed `AttributeError: module 'configparser' has no attribute 'SafeConfigParser'` in `versioneer.py` by replacing `SafeConfigParser` with `ConfigParser`.
 - **2025-06-30:** Fixed `AttributeError: 'ConfigParser' object has no attribute 'readfp'` in `versioneer.py` by replacing `readfp` with `read_file`. This continues progress on Task 1.3.
+- **2025-07-02:** Updated Cython build configuration and internal imports to start fixing Python 3 compilation errors (Task 1.3 still pending).
+- **2025-07-03:** Attempted full `cythonize` rebuild on Python 3.12. Compilation fails in `_qr.pyx`, leaving Task 1.3 unresolved.
 
 ## Phase 1: Foundational Modernization & Stability
 
@@ -14,10 +16,10 @@ This phase focuses on getting the codebase into a buildable, testable, and runna
 
 | Task ID | Description | Complexity | Time | Priority / Fruit | Status |
 |---|---|---|---|---|---|
-| 1.1 | **Automated Python 2 to 3 Conversion:** Run `pyupgrade` and `2to3` to automatically fix syntax, imports, and other common Python 2 idioms. | Low | Low | Low-Hanging | **Pending** |
-| 1.2 | **Update `setup.py` Dependencies:** Modify `install_requires` and Python version classifiers to reflect modern standards (Python 3.7+). | Low | Low | Low-Hanging | **Pending** |
-| 1.3 | **Resolve Cython Build Errors:** Iteratively run `python setup.py build_ext --inplace --cythonize` and fix compilation errors, focusing on the known issues with SciPy's BLAS/LAPACK headers in `_qr.pyx`. | High | Medium | **Critical Blocker** | **Pending** |
-| 1.4 | **Establish Test Runner & Fix Failures:** Replace the deprecated `nosetests` with `pytest`. Run the test suite and fix failures resulting from the Python/dependency updates. | Medium | Medium | High | **Pending** |
+| 1.1 | **Automated Python 2 to 3 Conversion:** Run `pyupgrade` and `2to3` to automatically fix syntax, imports, and other common Python 2 idioms. | Low | Low | Low-Hanging | **Complete** |
+| 1.2 | **Update `setup.py` Dependencies:** Modify `install_requires` and Python version classifiers to reflect modern standards (Python 3.7+). | Low | Low | Low-Hanging | **Complete** |
+| 1.3 | **Resolve Cython Build Errors:** Iteratively run `python setup.py build_ext --inplace --cythonize` and fix compilation errors, focusing on the known issues with SciPy's BLAS/LAPACK headers in `_qr.pyx`. | High | Medium | **Critical Blocker** | **In Progress** |
+| 1.4 | **Establish Test Runner & Fix Failures:** Replace the deprecated `nosetests` with `pytest`. Run the test suite and fix failures resulting from the Python/dependency updates. | Medium | Medium | High | **Complete** |
 | 1.5 | **Project Rename (`py-earth` -> `pyMARS`):** Perform a comprehensive search-and-replace of `pyearth`, `py-earth`, and `Earth` (where appropriate) to `pymars`, `py-mars`, and `MARS`. Update file names and directories. | Medium | Medium | Medium | **Pending** |
 
 ## Phase 2: Scikit-learn Compatibility

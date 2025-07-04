@@ -7,7 +7,7 @@ Created on Feb 16, 2013
 import os
 import numpy
 
-from nose.tools import assert_equal
+from numpy.testing import assert_equal
 
 from pyearth._forward import ForwardPasser
 from pyearth._basis import (Basis, ConstantBasisFunction,
@@ -47,6 +47,6 @@ def test_run():
                             'forward_regress.txt')
 #     with open(filename, 'w') as fl:
 #         fl.write(res)
-    with open(filename, 'r') as fl:
+    with open(filename) as fl:
         prev = fl.read()
     assert_equal(res, prev)
