@@ -11,8 +11,14 @@ from .testing_utils import (if_statsmodels, if_pandas, if_patsy,
                             assert_list_almost_equal,
                             if_sklearn_version_greater_than_or_equal_to,
                             if_platform_not_win_32)
-from nose.tools import (assert_equal, assert_true, assert_almost_equal,
-                        assert_list_equal, assert_raises, assert_not_equal)
+from .pytest_tools import (
+    assert_equal,
+    assert_true,
+    assert_almost_equal,
+    assert_list_equal,
+    assert_raises,
+    assert_not_equal,
+)
 import numpy
 from scipy.sparse import csr_matrix
 from pyearth._types import BOOL
