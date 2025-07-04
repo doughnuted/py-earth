@@ -14,10 +14,11 @@ requirements:
     - scikit-learn
     - nose
     - six
+    - scipy >=1.6
   run:
     - python
     - numpy
-    - scipy
+    - scipy >=1.6
     - scikit-learn
     - six
 
