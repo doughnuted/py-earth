@@ -7,9 +7,11 @@
 from ._util cimport log2, apply_weights_2d
 from libc.math cimport log
 from libc.math cimport abs
+cimport numpy as cnp
 cimport cython
 cdef FLOAT_t ZERO_TOL = 1e-16
 from _types import FLOAT
+from _types cimport FLOAT_t, INT_t, INDEX_t, BOOL_t
 import numpy as np
 import sys
 import six
@@ -986,7 +988,7 @@ cdef class Basis:
         cdef dict anova = self.anova_decomp()
         cdef dict intermediate = {}
         cdef dict result = {}
-        for vars, bfs in anova.iteritems():
+        for vars, bfs in anova.items():
             intermediate[vars] = {}
             for var in vars:
                 intermediate[vars][var] = []
@@ -995,8 +997,8 @@ cdef class Basis:
                     variable = bf.get_variable()
                     knot = bf.get_knot()
                     intermediate[vars][variable].append((bf, knot))
-        for d in intermediate.itervalues():
-            for var, lst in d.iteritems():
+        for d in intermediate.values():
+            for var, lst in d.items():
                 lst.sort(key=lambda x: x[1])
                 prev_minus = mins[var]
                 prev = prev_minus

@@ -6,6 +6,8 @@
 
 import numpy as np
 from libc.math cimport sqrt, log
+from _types cimport FLOAT_t, INT_t, INDEX_t, BOOL_t
+cimport numpy as cnp
 
 cdef FLOAT_t log2(FLOAT_t x):
     return log(x) / log(2.0)

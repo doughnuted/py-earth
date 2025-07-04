@@ -6,6 +6,8 @@
 
 from ._record cimport PruningPassIteration
 from ._util cimport gcv, apply_weights_2d
+from _types cimport FLOAT_t, INT_t, INDEX_t, BOOL_t
+cimport numpy as cnp
 import numpy as np
 
 from collections import defaultdict

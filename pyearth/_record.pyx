@@ -5,6 +5,9 @@
 # cython: profile = False
 
 from ._util cimport gcv, ascii_table
+from _types cimport FLOAT_t, INT_t, INDEX_t, BOOL_t
+cimport numpy as cnp
+import numpy as np
 
 
 MAXTERMS = 0

@@ -10,6 +10,8 @@ from ._basis cimport (Basis, BasisFunction, ConstantBasisFunction,
                       MissingnessBasisFunction)
 from ._record cimport ForwardPassIteration
 from ._types import BOOL, INT
+from _types cimport FLOAT_t, INT_t, INDEX_t, BOOL_t
+cimport numpy as cnp
 from ._knot_search cimport knot_search, MultipleOutcomeDependentData, PredictorDependentData, \
     KnotSearchReadOnlyData, KnotSearchState, KnotSearchWorkingData, KnotSearchData
 import sys
@@ -158,7 +160,7 @@ cdef class ForwardPasser:
         self.record = ForwardPassRecord(
             self.m, self.n, self.penalty, self.outcome.mse(), self.xlabels)
         
-    cpdef Basis get_basis(ForwardPasser self):
+    cpdef Basis get_basis(self):
         return self.basis
 
     cpdef init_linear_variables(ForwardPasser self):
