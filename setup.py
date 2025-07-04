@@ -118,25 +118,23 @@ def setup_package():
                         'Operating System :: Unix',
                         'Programming Language :: Cython',
                         'Programming Language :: Python',
-                        'Programming Language :: Python :: 2',
-                        'Programming Language :: Python :: 2.6',
-                        'Programming Language :: Python :: 2.7',
                         'Programming Language :: Python :: 3',
-                        'Programming Language :: Python :: 3.4',
-                        'Programming Language :: Python :: 3.5',
-                        'Programming Language :: Python :: 3.6',
+                        'Programming Language :: Python :: 3.8',
+                        'Programming Language :: Python :: 3.9',
+                        'Programming Language :: Python :: 3.10',
+                        'Programming Language :: Python :: 3.11',
                         'Topic :: Scientific/Engineering',
                         'Topic :: Software Development'],
         'install_requires': [
-            'scipy >= 0.16',
-            'scikit-learn >= 0.16',
+            'scipy >= 1.10',
+            'scikit-learn >= 1.3',
             'six'
             ],
         'extras_require': {'docs': ['sphinx_gallery'],
                            'dev': ['cython'],
                            'export': ['sympy'],
                            'all_tests': ['pandas', 'statsmodels', 'patsy', 'sympy']},
-        'setup_requires': ['numpy'],
+        'setup_requires': ['numpy>=1.19.5'],
         'include_package_data': True
     }
 
