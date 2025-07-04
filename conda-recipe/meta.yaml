@@ -12,7 +12,6 @@ requirements:
     - cython
     - numpy
     - scikit-learn
-    - nose
     - six
   run:
     - python
@@ -26,7 +25,7 @@ test:
     - numpy
     - scipy
     - scikit-learn
-    - nose
+    - pytest
   imports:
     - pyearth
 
