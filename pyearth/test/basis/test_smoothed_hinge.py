@@ -11,7 +11,7 @@ from pyearth._basis import SmoothedHingeBasisFunction, ConstantBasisFunction
 class Container(BaseContainer):
 
     def __init__(self):
-        super(Container, self).__init__()
+        super().__init__()
         self.parent = ConstantBasisFunction()
         self.bf1 = SmoothedHingeBasisFunction(self.parent,
                                               1.0, 0.0, 3.0, 10, 1,
