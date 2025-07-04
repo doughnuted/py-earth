@@ -1,7 +1,7 @@
 import pickle
 import numpy
 
-from nose.tools import assert_equal
+from numpy.testing import assert_equal
 
 from .base import BaseContainer
 from pyearth._types import BOOL

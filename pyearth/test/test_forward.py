@@ -7,7 +7,7 @@ Created on Feb 16, 2013
 import os
 import numpy
 
-from nose.tools import assert_equal
+from numpy.testing import assert_equal
 
 from pyearth._forward import ForwardPasser
 from pyearth._basis import (Basis, ConstantBasisFunction,

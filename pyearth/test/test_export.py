@@ -2,7 +2,7 @@ from pyearth._basis import (Basis, ConstantBasisFunction, HingeBasisFunction,
                             LinearBasisFunction)
 from pyearth.export import export_python_function, export_python_string,\
     export_sympy
-from nose.tools import assert_almost_equal
+from numpy.testing import assert_almost_equal
 import numpy
 import six
 from pyearth import Earth
