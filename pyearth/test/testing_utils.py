@@ -1,30 +1,32 @@
 import os
-from functools import wraps
-from nose import SkipTest
-from nose.tools import assert_almost_equal
-from distutils.version import LooseVersion
 import sys
+from functools import wraps
+from distutils.version import LooseVersion
+
+import pytest
+from numpy.testing import assert_almost_equal
 
 def if_environ_has(var_name):
-    # Test decorator that skips test if environment variable is not defined
+    """Decorator that skips the test when the given environment variable is missing."""
+
     def if_environ(func):
         @wraps(func)
         def run_test(*args, **kwargs):
             if var_name in os.environ:
                 return func(*args, **kwargs)
-            else:
-                raise SkipTest('Only run if %s environment variable is '
-                               'defined.' % var_name)
+            pytest.skip(f"Only run if {var_name} environment variable is defined.")
+
         return run_test
+
     return if_environ
 
 def if_platform_not_win_32(func):
     @wraps(func)
     def run_test(*args, **kwargs):
         if sys.platform == 'win32':
-            raise SkipTest('Skip for 32 bit Windows platforms.')
-        else:
-            return func(*args, **kwargs)
+            pytest.skip('Skip for 32 bit Windows platforms.')
+        return func(*args, **kwargs)
+
     return run_test
             
 def if_sklearn_version_greater_than_or_equal_to(min_version):
@@ -37,67 +39,53 @@ def if_sklearn_version_greater_than_or_equal_to(min_version):
         def run_test(*args, **kwargs):
             import sklearn
             if LooseVersion(sklearn.__version__) < LooseVersion(min_version):
-                raise SkipTest('sklearn version less than %s' %
-                               str(min_version))
-            else:
-                return func(*args, **kwargs)
+                pytest.skip('sklearn version less than %s' % str(min_version))
+            return func(*args, **kwargs)
         return run_test
     return _if_sklearn_version
 
 
 def if_statsmodels(func):
-    """Test decorator that skips test if statsmodels not installed. """
+    """Test decorator that skips test if statsmodels is not installed."""
 
     @wraps(func)
     def run_test(*args, **kwargs):
-        try:
-            import statsmodels
-        except ImportError:
-            raise SkipTest('statsmodels not available.')
-        else:
-            return func(*args, **kwargs)
+        pytest.importorskip('statsmodels')
+        return func(*args, **kwargs)
+
     return run_test
 
 
 def if_pandas(func):
-    """Test decorator that skips test if pandas not installed. """
+    """Test decorator that skips test if pandas is not installed."""
 
     @wraps(func)
     def run_test(*args, **kwargs):
-        try:
-            import pandas
-        except ImportError:
-            raise SkipTest('pandas not available.')
-        else:
-            return func(*args, **kwargs)
+        pytest.importorskip('pandas')
+        return func(*args, **kwargs)
+
     return run_test
 
 def if_sympy(func):
-    """ Test decorator that skips test if sympy not installed """ 
-    
+    """Test decorator that skips test if sympy is not installed."""
+
     @wraps(func)
     def run_test(*args, **kwargs):
-        try:
-            from sympy import Symbol, Add, Mul, Max, RealNumber, Piecewise, sympify, Pow, And, lambdify
-        except ImportError:
-            raise SkipTest('sympy not available.')
-        else:
-            return func(*args, **kwargs)
+        pytest.importorskip('sympy')
+        return func(*args, **kwargs)
+
     return run_test
     
 
 
 def if_patsy(func):
-    """Test decorator that skips test if patsy not installed. """
+    """Test decorator that skips test if patsy is not installed."""
 
     @wraps(func)
     def run_test(*args, **kwargs):
-        try:
-            import patsy
-        except ImportError:
-            raise SkipTest('patsy not available.')
-        else:
-            return func(*args, **kwargs)
+        pytest.importorskip('patsy')
+        return func(*args, **kwargs)
+
     return run_test
 
 
