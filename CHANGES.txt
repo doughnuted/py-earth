@@ -1,0 +1,6 @@
+Next Release
+============
+
+- Updated GCV factor computation: gcv_adjust factors are computed once per iteration and reused while evaluating candidate terms. This fixes penalty application and speeds up the forward pass.
+- Added `#include "cpython/longintrepr.h"` for Python 3.12 compatibility.
+
