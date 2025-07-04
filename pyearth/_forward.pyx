@@ -270,7 +270,9 @@ cdef class ForwardPasser:
         cdef INDEX_t endspan
         cdef bint linear_dependence
         cdef bint dependent
-        # TODO: Shouldn't there be weights here?
+        # The GCV adjustment is based on the number of observations.
+        # The mse values used below already incorporate sample weights,
+        # so ``self.m`` (the unweighted sample size) is appropriate here.
         cdef FLOAT_t gcv_factor_k_plus_1 = gcv_adjust(k + 1, self.m,
                                                       self.penalty)
         cdef FLOAT_t gcv_factor_k_plus_2 = gcv_adjust(k + 2, self.m,
