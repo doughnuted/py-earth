@@ -88,6 +88,14 @@ def test_get_params():
                                          'verbose': False})
 
 
+def test_set_params():
+    model = Earth().set_params(max_degree=2, enable_pruning=False)
+    assert_equal(model.max_degree, 2)
+    assert_equal(model.enable_pruning, False)
+    assert_equal(model.get_params()['max_degree'], 2)
+    assert_equal(model.get_params()['enable_pruning'], False)
+
+
 @if_statsmodels
 def test_linear_fit():
     from statsmodels.regression.linear_model import GLS, OLS
