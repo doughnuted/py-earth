@@ -12,19 +12,20 @@ requirements:
     - cython
     - numpy
     - scikit-learn
+    - scipy >=0.16
     - nose
     - six
   run:
     - python
     - numpy
-    - scipy
+    - scipy >=0.16
     - scikit-learn
     - six
 
 test:
   requires:
     - numpy
-    - scipy
+    - scipy >=0.16
     - scikit-learn
     - nose
   imports:
