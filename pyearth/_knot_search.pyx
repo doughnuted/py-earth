@@ -165,8 +165,7 @@ cdef class SingleOutcomeDependentData:
         Return the weighted mean squared error for the linear least squares problem
         represented by Q_t, y, and w.
         '''
-        # TODO: Why is this squared?
-        return ((self.omega - np.dot(self.theta, self.theta)) ** 2)# / np.sum(self.w)
+        return self.omega - np.dot(self.theta, self.theta)
     
 #     cpdef int update_from_basis_function(OutcomeDependentData self, BasisFunction bf, FLOAT_t[:,:] X, 
 #                                          BOOL_t[:,:] missing, FLOAT_t zero_tol) except *:
