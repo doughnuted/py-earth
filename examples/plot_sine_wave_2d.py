@@ -29,8 +29,8 @@ y_mix = numpy.concatenate((y1[:, numpy.newaxis], y2[:, numpy.newaxis]), axis=1)
 model.fit(X, y_mix)
 
 # Print the model
-print(model.trace())
-print(model.summary())
+print((model.trace()))
+print((model.summary()))
 
 # Plot the model
 y_hat = model.predict(X)

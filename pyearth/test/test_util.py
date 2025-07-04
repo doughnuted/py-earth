@@ -1,6 +1,4 @@
-
-
-class TestUtil(object):
+class TestUtil:
 
     def __init__(self):
         pass

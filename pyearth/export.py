@@ -132,7 +132,7 @@ def export_sympy_term_expressions(earth_model):
 
     def missingness_bf_get_missables(bf):
         bf_var = bf.label
-        return set([bf_var])
+        return {bf_var}
 
     def non_missable(bf):
         return set()

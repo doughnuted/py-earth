@@ -278,7 +278,7 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
 
     """
 
-    forward_pass_arg_names = set([
+    forward_pass_arg_names = {
         'max_terms', 'max_degree', 'allow_missing', 'penalty',
         'endspan_alpha', 'endspan',
         'minspan_alpha', 'minspan',
@@ -287,12 +287,12 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
         'use_fast', 'fast_K', 'fast_h',
         'feature_importance_type',
         'verbose'
-    ])
-    pruning_pass_arg_names = set([
+    }
+    pruning_pass_arg_names = {
         'penalty',
         'feature_importance_type',
         'verbose'
-    ])
+    }
 
     def __init__(self, max_terms=None, max_degree=None, allow_missing=False,
                  penalty=None, endspan_alpha=None, endspan=None,
@@ -590,7 +590,7 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
         if self.feature_importance_type is not None:
             feature_importance_type = self.feature_importance_type
             try:
-                is_str = isinstance(feature_importance_type, basestring)
+                is_str = isinstance(feature_importance_type, str)
             except NameError:
                 is_str = isinstance(feature_importance_type, str)
             if is_str:
@@ -923,7 +923,7 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
                 i += 1
         result += ascii_table(header, data)
         result += '\n'
-        result += 'MSE: %.4f, GCV: %.4f, RSQ: %.4f, GRSQ: %.4f' % (
+        result += 'MSE: {:.4f}, GCV: {:.4f}, RSQ: {:.4f}, GRSQ: {:.4f}'.format(
             self.mse_, self.gcv_, self.rsq_, self.grsq_)
         return result
 
@@ -944,16 +944,16 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
         """
         result = ''
         if self._feature_importances_dict:
-            max_label_length = max(map(len, self.xlabels_)) + 5
+            max_label_length = max(list(map(len, self.xlabels_))) + 5
             result += (max_label_length * ' ' +
-                       '    '.join(self._feature_importances_dict.keys()) + '\n')
+                       '    '.join(list(self._feature_importances_dict.keys())) + '\n')
             labels = np.array(self.xlabels_)
             if sort_by:
-                if sort_by not in self._feature_importances_dict.keys():
+                if sort_by not in list(self._feature_importances_dict.keys()):
                     raise ValueError('Invalid feature importance type name '
                                      'to sort with : %s, available : %s' % (
                                          sort_by,
-                                         self._feature_importances_dict.keys()))
+                                         list(self._feature_importances_dict.keys())))
                 imp = self._feature_importances_dict[sort_by]
                 indices = np.argsort(imp)[::-1]
             else:
@@ -961,7 +961,7 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
             labels = labels[indices]
             for i, label in enumerate(labels):
                 result += label + ' ' * (max_label_length - len(label))
-                for crit_name, imp in self._feature_importances_dict.items():
+                for crit_name, imp in list(self._feature_importances_dict.items()):
                     imp = imp[indices]
                     result += '%.2f' % imp[i] + (len(crit_name) ) * ' '
                 result += '\n'
@@ -1368,7 +1368,7 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
             return 3.0
 
 
-class EarthTrace(object):
+class EarthTrace:
 
     def __init__(self, forward_trace, pruning_trace):
         self.forward_trace = forward_trace

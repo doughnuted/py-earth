@@ -23,9 +23,9 @@ import matplotlib.font_manager as fm
 
 # We need a special font for the code below.  It can be downloaded this way:
 import os
-import urllib
+import urllib.request, urllib.parse, urllib.error
 if not os.path.exists('Humor-Sans.ttf'):
-    fhandle = urllib.urlopen('https://github.com/shreyankg/xkcd-desktop/raw/master/Humor-Sans.ttf')
+    fhandle = urllib.request.urlopen('https://github.com/shreyankg/xkcd-desktop/raw/master/Humor-Sans.ttf')
     open('Humor-Sans.ttf', 'wb').write(fhandle.read())
 
 

@@ -39,21 +39,21 @@ for i, alpha in enumerate(alphas):
                   thresh=0.)
     output_weight = np.array([alpha, 1 - alpha])
     model.fit(X, y_mix, output_weight=output_weight)
-    print(model.summary())
+    print((model.summary()))
 
     # Plot the model
     y_hat = model.predict(X)
 
     mse = ((y_hat - y_mix) ** 2).mean(axis=0)
     ax = plt.subplot(n_plots, 2, k)
-    ax.set_ylabel("Run {0}".format(i + 1), rotation=0, labelpad=20)
+    ax.set_ylabel("Run {}".format(i + 1), rotation=0, labelpad=20)
     plt.plot(X[:, 6], y_mix[:, 0], 'r.')
     plt.plot(X[:, 6], model.predict(X)[:, 0], 'b.')
-    plt.title("MSE: {0:.3f}, Weight : {1:.1f}".format(mse[0], alpha))
+    plt.title("MSE: {:.3f}, Weight : {:.1f}".format(mse[0], alpha))
     plt.subplot(n_plots, 2, k + 1)
     plt.plot(X[:, 5], y_mix[:, 1], 'r.')
     plt.plot(X[:, 5], model.predict(X)[:, 1], 'b.')
-    plt.title("MSE: {0:.3f}, Weight : {1:.1f}".format(mse[1], 1 - alpha))
+    plt.title("MSE: {:.3f}, Weight : {:.1f}".format(mse[1], 1 - alpha))
     k += 2
 plt.tight_layout()
 plt.show()

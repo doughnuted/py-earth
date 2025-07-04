@@ -17,16 +17,16 @@ m = 1000
 n = 10
 X = 10 * numpy.random.uniform(size=(m, n)) - 40
 y = 100 * \
-    (numpy.sin((X[:, 6])) - 4.0) + \
+    (numpy.sin(X[:, 6]) - 4.0) + \
     10 * numpy.random.normal(size=m)
 
 # Fit an Earth model
 model = Earth(max_degree=2, minspan_alpha=.5, verbose=False)
 model.fit(X, y)
 
-print(model.summary())
+print((model.summary()))
 
 #return sympy expression 
 print('Resulting sympy expression:')
-print(export.export_sympy(model))
+print((export.export_sympy(model)))
 
