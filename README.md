@@ -23,7 +23,24 @@ If there are other features or improvements you'd like to see in py-earth, pleas
 
 ## Installation
 
-Make sure you have numpy and scikit-learn installed.  Then do the following:
+Make sure you have numpy and scikit-learn installed.  As of the modernized
+release, py-earth also requires **SciPy 1.10 or newer**.  If you previously
+installed py-earth with an older SciPy version you should upgrade SciPy before
+reinstalling:
+
+```
+pip install -U scipy
+```
+
+or with conda:
+
+```
+conda update scipy
+```
+
+After upgrading SciPy you may need to clean any compiled extensions with
+`python setup.py clean` prior to reinstalling.
+Then do the following:
 
 ```
 git clone git://github.com/scikit-learn-contrib/py-earth.git
