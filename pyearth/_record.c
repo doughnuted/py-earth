@@ -169,10 +169,12 @@ END: Cython Metadata */
 #define CYTHON_FAST_PYCCALL  (CYTHON_FAST_PYCALL && PY_VERSION_HEX >= 0x030600B1)
 #endif
 #if CYTHON_USE_PYLONG_INTERNALS
-  #include "longintrepr.h"
-  #undef SHIFT
-  #undef BASE
-  #undef MASK
+#if PY_VERSION_HEX < 0x030C0000
+#include "longintrepr.h"
+#undef SHIFT
+#undef BASE
+#undef MASK
+#endif
 #endif
 #if CYTHON_COMPILING_IN_PYPY && PY_VERSION_HEX < 0x02070600 && !defined(Py_OptimizeFlag)
   #define Py_OptimizeFlag 0
