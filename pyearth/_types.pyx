@@ -1,3 +1,4 @@
+# cython: language_level = 3
 import numpy as np
 FLOAT = np.float64
 INT = np.int
