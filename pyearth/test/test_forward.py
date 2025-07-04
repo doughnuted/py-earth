@@ -47,6 +47,6 @@ def test_run():
                             'forward_regress.txt')
 #     with open(filename, 'w') as fl:
 #         fl.write(res)
-    with open(filename, 'r') as fl:
+    with open(filename) as fl:
         prev = fl.read()
     assert_equal(res, prev)

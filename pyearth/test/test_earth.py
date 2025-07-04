@@ -165,12 +165,12 @@ def test_missing_data():
     if regenerate_target_files:
         with open(filename, 'w') as fl:
             fl.write(res)
-    with open(filename, 'r') as fl:
+    with open(filename) as fl:
         prev = fl.read()
     try:
         assert_true(abs(float(res) - float(prev)) < .03)
     except AssertionError:
-        print('Got %f, %f' % (float(res), float(prev)))
+        print(('Got {:f}, {:f}'.format(float(res), float(prev))))
         raise
 
 def test_fit():
@@ -183,7 +183,7 @@ def test_fit():
     if regenerate_target_files:
         with open(filename, 'w') as fl:
             fl.write(res)
-    with open(filename, 'r') as fl:
+    with open(filename) as fl:
         prev = fl.read()
     assert_true(abs(float(res) - float(prev)) < .05)
 
@@ -198,7 +198,7 @@ def test_smooth():
     if regenerate_target_files:
         with open(filename, 'w') as fl:
             fl.write(res)
-    with open(filename, 'r') as fl:
+    with open(filename) as fl:
         prev = fl.read()
     assert_true(abs(float(res) - float(prev)) < .05)
 
@@ -212,7 +212,7 @@ def test_linvars():
     if regenerate_target_files:
         with open(filename, 'w') as fl:
             fl.write(res)
-    with open(filename, 'r') as fl:
+    with open(filename) as fl:
         prev = fl.read()
 
     assert_equal(res, prev)
@@ -230,7 +230,7 @@ def test_linvars_coefs():
                   check_every=1,
                   thresh=0,
                   minspan=1,
-                  endspan=1).fit(X, y, linvars=range(nb_vars))
+                  endspan=1).fit(X, y, linvars=list(range(nb_vars)))
     earth_bias = earth.coef_[0, 0]
     earth_coefs = sorted(earth.coef_[1:])
 
@@ -259,7 +259,7 @@ def test_pathological_cases():
                           'endspan': 1,
                           'check_every': 1,
                           'sample_weight': 'issue_50_weight.csv'}}
-    for case, settings in cases.iteritems():
+    for case, settings in list(cases.items()):
         data = pandas.read_csv(os.path.join(directory, case + '.csv'))
         y = data['y']
         del data['y']
@@ -272,7 +272,7 @@ def test_pathological_cases():
             sample_weight = None
         model = Earth(**settings)
         model.fit(X, y, sample_weight=sample_weight)
-        with open(os.path.join(directory, case + '.txt'), 'r') as infile:
+        with open(os.path.join(directory, case + '.txt')) as infile:
             correct = infile.read()
         assert_equal(model.summary(), correct)
 
@@ -524,7 +524,7 @@ def test_feature_importance():
     earth.fit(X, y)
     assert type(earth.feature_importances_) == dict
     assert set(earth.feature_importances_.keys()) == set(criteria)
-    for crit, val in earth .feature_importances_.items():
+    for crit, val in list(earth .feature_importances_.items()):
         assert len(val) == X.shape[1]
 
     assert_raises(

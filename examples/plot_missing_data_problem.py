@@ -32,7 +32,7 @@ model = Earth(max_degree=5, minspan_alpha=.5, allow_missing=True,
               enable_pruning=True, thresh=.001, smooth=True, verbose=2)
 model.fit(X, y)
 # Print the model
-print(model.summary())
+print((model.summary()))
 
 # Plot the model
 y_hat = model.predict(X)

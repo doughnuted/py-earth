@@ -11,7 +11,7 @@ from pyearth._basis import (HingeBasisFunction, SmoothedHingeBasisFunction,
 class Container(BaseContainer):
 
     def __init__(self):
-        super(Container, self).__init__()
+        super().__init__()
         self.basis = Basis(self.X.shape[1])
         self.parent = ConstantBasisFunction()
         self.bf1 = HingeBasisFunction(self.parent, 1.0, 10, 1, False)
@@ -30,11 +30,11 @@ class Container(BaseContainer):
 def test_anova_decomp():
     cnt = Container()
     anova = cnt.basis.anova_decomp()
-    assert_equal(set(anova[frozenset([1])]), set([cnt.bf1]))
-    assert_equal(set(anova[frozenset([2])]), set([cnt.bf2, cnt.bf4,
-                                                  cnt.bf5]))
-    assert_equal(set(anova[frozenset([2, 3])]), set([cnt.bf3]))
-    assert_equal(set(anova[frozenset()]), set([cnt.parent]))
+    assert_equal(set(anova[frozenset([1])]), {cnt.bf1})
+    assert_equal(set(anova[frozenset([2])]), {cnt.bf2, cnt.bf4,
+                                                  cnt.bf5})
+    assert_equal(set(anova[frozenset([2, 3])]), {cnt.bf3})
+    assert_equal(set(anova[frozenset()]), {cnt.parent})
     assert_equal(len(anova), 4)
 
 

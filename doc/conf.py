@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # py-earth documentation build configuration file, created by
 # sphinx-quickstart on Thu Jul 11 21:44:49 2013.
@@ -57,8 +56,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'py-earth'
-copyright = u'2013, Jason Rudy'
+project = 'py-earth'
+copyright = '2013, Jason Rudy'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -201,8 +200,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ('index', 'py-earth.tex', u'py-earth Documentation',
-     u'Jason Rudy', 'manual'),
+    ('index', 'py-earth.tex', 'py-earth Documentation',
+     'Jason Rudy', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -231,8 +230,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'py-earth', u'py-earth Documentation',
-     [u'Jason Rudy'], 1)
+    ('index', 'py-earth', 'py-earth Documentation',
+     ['Jason Rudy'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -245,8 +244,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'py-earth', u'py-earth Documentation',
-     u'Jason Rudy', 'py-earth', 'One line description of project.',
+    ('index', 'py-earth', 'py-earth Documentation',
+     'Jason Rudy', 'py-earth', 'One line description of project.',
                     'Miscellaneous'),
 ]
 

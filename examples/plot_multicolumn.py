@@ -39,8 +39,8 @@ model = Earth(max_degree=5, minspan_alpha=.5, allow_missing=True,
 model.fit(X, y)
 
 # Print the model
-print(model.trace())
-print(model.summary())
+print((model.trace()))
+print((model.summary()))
 
 # Plot the model
 y_hat = model.predict(X)

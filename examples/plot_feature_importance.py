@@ -45,9 +45,9 @@ model.fit(X, y)
 rf = RandomForestRegressor()
 rf.fit(X, y)
 # Print the model
-print(model.trace())
-print(model.summary())
-print(model.summary_feature_importances(sort_by='gcv'))
+print((model.trace()))
+print((model.summary()))
+print((model.summary_feature_importances(sort_by='gcv')))
 
 # Plot the feature importances
 importances = model.feature_importances_
@@ -67,6 +67,6 @@ for crit in criteria:
     plt.title(crit)
     plt.ylabel('importances')
     idx += 1
-title = '$x_0,...x_9 \sim \mathcal{N}(0, 1)$\n$y= 10sin(\pi x_{0}x_{1}) + 20(x_2 - 0.5)^2 + 10x_3 + 5x_4 + Unif(0, 1)$'
+title = '$x_0,...x_9 \\sim \\mathcal{N}(0, 1)$\n$y= 10sin(\\pi x_{0}x_{1}) + 20(x_2 - 0.5)^2 + 10x_3 + 5x_4 + Unif(0, 1)$'
 fig.suptitle(title, fontsize="x-large")
 plt.show()

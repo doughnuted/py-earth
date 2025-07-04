@@ -35,8 +35,8 @@ hp = dict(
 model_normal = Earth(**hp)
 t = Timer(lambda: model_normal.fit(inputs, outputs))
 duration_normal = t.timeit(number=1)
-print("Normal : MSE={0:.5f}, duration={1:.2f}s".
-      format(model_normal.mse_, duration_normal))
+print(("Normal : MSE={0:.5f}, duration={1:.2f}s".
+      format(model_normal.mse_, duration_normal)))
 model_fast = Earth(use_fast=True,
                    fast_K=5,
                    fast_h=1,
@@ -44,9 +44,9 @@ model_fast = Earth(use_fast=True,
 
 t = Timer(lambda: model_fast.fit(inputs, outputs))
 duration_fast = t.timeit(number=1)
-print("Fast: MSE={0:.5f}, duration={1:.2f}s".
-      format(model_fast.mse_, duration_fast))
+print(("Fast: MSE={0:.5f}, duration={1:.2f}s".
+      format(model_fast.mse_, duration_fast)))
 speedup = duration_normal / duration_fast
-print("diagnostic : MSE goes from {0:.5f} to {1:.5f} but it "
+print(("diagnostic : MSE goes from {0:.5f} to {1:.5f} but it "
       "is {2:.2f}x faster".
-      format(model_normal.mse_, model_fast.mse_, speedup))
+      format(model_normal.mse_, model_fast.mse_, speedup)))

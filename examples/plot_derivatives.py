@@ -26,8 +26,8 @@ model = Earth(max_degree=2, minspan_alpha=.5, smooth=True)
 model.fit(X, y)
 
 # Print the model
-print(model.trace())
-print(model.summary())
+print((model.trace()))
+print((model.summary()))
 
 # Get the predicted values and derivatives
 y_hat = model.predict(X)

@@ -11,7 +11,7 @@ from pyearth._basis import ConstantBasisFunction
 class Container(BaseContainer):
 
     def __init__(self):
-        super(Container, self).__init__()
+        super().__init__()
         self.bf = ConstantBasisFunction()
 
 
