@@ -270,14 +270,19 @@ cdef class ForwardPasser:
         cdef INDEX_t endspan
         cdef bint linear_dependence
         cdef bint dependent
-        # TODO: Shouldn't there be weights here?
-        cdef FLOAT_t gcv_factor_k_plus_1 = gcv_adjust(k + 1, self.m,
+        # The GCV calculation is based on the effective sample size.
+        # ``self.sample_weight`` stores the square root of the original
+        # sample weights, so ``self.total_weight`` (the sum of
+        # ``self.sample_weight ** 2``) equals the sum of the original
+        # weights. Using this value ensures the factors respect sample
+        # weighting.
+        cdef FLOAT_t gcv_factor_k_plus_1 = gcv_adjust(k + 1, self.total_weight,
                                                       self.penalty)
-        cdef FLOAT_t gcv_factor_k_plus_2 = gcv_adjust(k + 2, self.m,
+        cdef FLOAT_t gcv_factor_k_plus_2 = gcv_adjust(k + 2, self.total_weight,
                                                       self.penalty)
-        cdef FLOAT_t gcv_factor_k_plus_3 = gcv_adjust(k + 3, self.m,
+        cdef FLOAT_t gcv_factor_k_plus_3 = gcv_adjust(k + 3, self.total_weight,
                                                       self.penalty)
-        cdef FLOAT_t gcv_factor_k_plus_4 = gcv_adjust(k + 4, self.m,
+        cdef FLOAT_t gcv_factor_k_plus_4 = gcv_adjust(k + 4, self.total_weight,
                                                       self.penalty)
         cdef FLOAT_t gcv_
         cdef FLOAT_t mse_
