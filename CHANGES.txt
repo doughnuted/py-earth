@@ -1,0 +1,3 @@
+* Updated code to use `items()` and `values()` instead of deprecated
+  `iteritems()` and `itervalues()` methods.
+* Removed remaining references in generated C files

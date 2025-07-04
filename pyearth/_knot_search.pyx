@@ -10,6 +10,7 @@ from libc.math cimport sqrt
 from libc.math cimport log
 cimport numpy as cnp
 from _types import INDEX, FLOAT
+from _types cimport FLOAT_t, INT_t, INDEX_t, BOOL_t
 from _util cimport log2
 
 

@@ -15,83 +15,82 @@ def get_ext_modules():
     # Find all includes
     local_inc = 'pyearth'
     numpy_inc = numpy.get_include()
+    # CPython internal headers moved under a 'cpython' subdir starting with
+    # Python 3.11. These are required when compiling the generated C sources.
+    import sysconfig, os
+    cpython_inc = os.path.join(sysconfig.get_paths()["include"], "cpython")
+    inc_dirs = [numpy_inc]
+    if os.path.isdir(cpython_inc):
+        inc_dirs.append(cpython_inc)
 
     # Set up the ext_modules for Cython or not, depending
     if cythonize_switch:
         from Cython.Build import cythonize
         ext_modules = cythonize(
             [Extension(
-                "pyearth._util", ["pyearth/_util.pyx"], include_dirs=[numpy_inc]),
+                "pyearth._util", ["pyearth/_util.pyx"], include_dirs=[local_inc] + inc_dirs),
              Extension(
                  "pyearth._basis",
                  ["pyearth/_basis.pyx"],
-                 include_dirs=[numpy_inc]),
+                 include_dirs=[local_inc] + inc_dirs),
              Extension(
                  "pyearth._record",
                  ["pyearth/_record.pyx"],
-                 include_dirs=[numpy_inc]),
+                 include_dirs=[local_inc] + inc_dirs),
              Extension(
                  "pyearth._pruning",
                  ["pyearth/_pruning.pyx"],
-                 include_dirs=[local_inc,
-                               numpy_inc]),
+                 include_dirs=[local_inc] + inc_dirs),
              Extension(
                  "pyearth._forward",
                  ["pyearth/_forward.pyx"],
-                 include_dirs=[local_inc,
-                               numpy_inc]),
+                 include_dirs=[local_inc] + inc_dirs),
              Extension(
                  "pyearth._knot_search",
                  ["pyearth/_knot_search.pyx"],
-                 include_dirs=[local_inc,
-                               numpy_inc]),
+                 include_dirs=[local_inc] + inc_dirs),
              Extension(
                  "pyearth._qr",
                  ["pyearth/_qr.pyx"],
-                 include_dirs=[local_inc,
-                               numpy_inc]),
+                 include_dirs=[local_inc] + inc_dirs),
              Extension(
                  "pyearth._types",
                  ["pyearth/_types.pyx"],
-                 include_dirs=[local_inc,
-                               numpy_inc])
-             ])
+                 include_dirs=[local_inc] + inc_dirs)
+             ],
+            language_level="3",
+            include_path=[local_inc] + inc_dirs)
     else:
         ext_modules = [Extension(
-            "pyearth._util", ["pyearth/_util.c"], include_dirs=[numpy_inc]),
+            "pyearth._util", ["pyearth/_util.c"], include_dirs=[local_inc] + inc_dirs),
             Extension(
                 "pyearth._basis",
                 ["pyearth/_basis.c"],
-                include_dirs=[numpy_inc]),
+                include_dirs=[local_inc] + inc_dirs),
             Extension(
                 "pyearth._record",
                 ["pyearth/_record.c"],
-                include_dirs=[numpy_inc]),
+                include_dirs=[local_inc] + inc_dirs),
             Extension(
                 "pyearth._pruning",
                 ["pyearth/_pruning.c"],
-                include_dirs=[local_inc,
-                              numpy_inc]),
+                include_dirs=[local_inc] + inc_dirs),
             Extension(
                 "pyearth._forward",
                 ["pyearth/_forward.c"],
-                include_dirs=[local_inc,
-                              numpy_inc]),
+                include_dirs=[local_inc] + inc_dirs),
             Extension(
                 "pyearth._knot_search",
                 ["pyearth/_knot_search.c"],
-                include_dirs=[local_inc,
-                              numpy_inc]),
+                include_dirs=[local_inc] + inc_dirs),
             Extension(
                 "pyearth._qr",
                 ["pyearth/_qr.c"],
-                include_dirs=[local_inc,
-                              numpy_inc]),
+                include_dirs=[local_inc] + inc_dirs),
             Extension(
                 "pyearth._types",
                 ["pyearth/_types.c"],
-                include_dirs=[local_inc,
-                              numpy_inc])
+                include_dirs=[local_inc] + inc_dirs)
         ]
     return ext_modules
 
