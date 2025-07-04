@@ -4,7 +4,6 @@ from pyearth.export import export_python_function, export_python_string,\
     export_sympy
 from nose.tools import assert_almost_equal
 import numpy
-import six
 from pyearth import Earth
 from pyearth._types import BOOL
 from pyearth.test.testing_utils import if_pandas,\
@@ -49,7 +48,7 @@ def test_export_python_string():
     for smooth in (True, False):
         model = Earth(penalty=1, smooth=smooth, max_degree=2).fit(X, y)
         export_model = export_python_string(model, 'my_test_model')
-        six.exec_(export_model, globals())
+        exec(export_model, globals())
         for exp_pred, model_pred in zip(model.predict(X), my_test_model(X)):
             assert_almost_equal(exp_pred, model_pred)
 
