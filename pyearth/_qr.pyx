@@ -4,9 +4,11 @@
 # cython: wraparound = False
 # cython: profile = False
 import numpy as np
+cimport numpy as cnp
 from scipy.linalg.cython_lapack cimport dlarfg, dlarft, dlarfb
 from scipy.linalg.cython_blas cimport dcopy
 from libc.math cimport abs
+from pyearth._types cimport FLOAT_t, BOOL_t
 from _types import BOOL, FLOAT
 
 cdef class UpdatingQT:
@@ -198,7 +200,7 @@ cdef class Householder:
         cdef int ldc = C.strides[1] // C.itemsize
         cdef FLOAT_t * work = <FLOAT_t *> &(self.work[0,0])
         cdef int ldwork = self.m
-        print C.shape
+        # Debug statement removed for Python 3 compatibility
         dlarfb(&side, &trans, &direct, &storev, &M, &N, &K, 
                V, &ldv, T, &ldt, C_arg, &ldc, work, &ldwork)
         

@@ -53,3 +53,4 @@ This phase explores potential new features to enhance the library's capabilities
 | **Improved Categorical Feature Handling** | More seamless and efficient handling of categorical features, potentially through integration with `sklearn.preprocessing` or custom encoding strategies optimized for MARS. |
 | **Interaction Term Export** | A utility function to export the learned interaction terms as features that can be used in other downstream models (e.g., linear models, GBDTs). |
 | **Gemini CLI Action** | A GitHub Action that uses the Gemini CLI to analyze model results, suggest improvements, or automate parts of the development workflow. |
+- **2025-06-30:** Attempted to build `_qr.pyx` with SciPy 1.16. Updated `_types.pxd` for NumPy 2.x and cleaned a debug print in `_qr.pyx`.
