@@ -8,45 +8,25 @@ environment:
     CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\build_tools\\appveyor\\run_with_env.cmd"
 
   matrix:
-    - PYTHON: "C:\\Python26"
-      PYTHON_VERSION: "2.6.9"
-      PYTHON_ARCH: "32"
-      MINICONDA: "C:\\Miniconda"
-
-    - PYTHON: "C:\\Python26-x64"
-      PYTHON_VERSION: "2.6.9"
+    - PYTHON: "C:\\Python38-x64"
+      PYTHON_VERSION: "3.8"
       PYTHON_ARCH: "64"
-      MINICONDA: "C:\\Miniconda-x64"
-      
-    - PYTHON: "C:\\Python27"
-      PYTHON_VERSION: "2.7.8"
-      PYTHON_ARCH: "32"
-      MINICONDA: "C:\\Miniconda"
+      MINICONDA: "C:\\Miniconda3"
 
-    - PYTHON: "C:\\Python27-x64"
-      PYTHON_VERSION: "2.7.8"
+    - PYTHON: "C:\\Python39-x64"
+      PYTHON_VERSION: "3.9"
       PYTHON_ARCH: "64"
-      MINICONDA: "C:\\Miniconda-x64"
+      MINICONDA: "C:\\Miniconda3"
 
-    - PYTHON: "C:\\Python35"
-      PYTHON_VERSION: "3.5.0"
-      PYTHON_ARCH: "32"
-      MINICONDA: "C:\\Miniconda35"
-
-    - PYTHON: "C:\\Python35-x64"
-      PYTHON_VERSION: "3.5.0"
+    - PYTHON: "C:\\Python310-x64"
+      PYTHON_VERSION: "3.10"
       PYTHON_ARCH: "64"
-      MINICONDA: "C:\\Miniconda35-x64"
-    
-    - PYTHON: "C:\\Python36"
-      PYTHON_VERSION: "3.6.3"
-      PYTHON_ARCH: "32"
-      MINICONDA: "C:\\Miniconda36"
+      MINICONDA: "C:\\Miniconda3"
 
-    - PYTHON: "C:\\Python36-x64"
-      PYTHON_VERSION: "3.6.3"
+    - PYTHON: "C:\\Python311-x64"
+      PYTHON_VERSION: "3.11"
       PYTHON_ARCH: "64"
-      MINICONDA: "C:\\Miniconda36-x64"
+      MINICONDA: "C:\\Miniconda3"
     
 
 
@@ -65,7 +45,7 @@ install:
   - "rmdir C:\\cygwin /s /q"
 
   # Install the build and runtime dependencies of the project.
-  - "conda install --quiet --yes six numpy pandas sympy scipy cython nose scikit-learn wheel conda-build"
+  - "conda install --quiet --yes six numpy pandas sympy \"scipy>=1.7\" cython pytest scikit-learn wheel conda-build"
   - "pip install sphinx-gallery"
   - "python setup.py bdist_wheel bdist_wininst"
   - "python setup.py build_ext --inplace --cythonize"
@@ -84,7 +64,7 @@ test_script:
   - "mkdir empty_folder"
   - "cd empty_folder"
 
-  - "python -c \"import nose; nose.main()\" -s -v pyearth"
+  - "pytest -s -v pyearth"
 
     # Move back to the project folder
   - "cd .."
