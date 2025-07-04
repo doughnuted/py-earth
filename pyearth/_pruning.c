@@ -3171,11 +3171,11 @@ static int __pyx_pf_7pyearth_8_pruning_13PruningPasser___init__(struct __pyx_obj
   __pyx_L3:;
 
   /* "pyearth/_pruning.pyx":40
- * 
+ *
  *         # feature importance
  *         feature_importance_criteria = kwargs.get("feature_importance_type", [])             # <<<<<<<<<<<<<<
- *         if isinstance(feature_importance_criteria, basestring):
- *             feature_importance_criteria = [feature_importance_criteria]
+ *         try:
+ *             is_str = isinstance(feature_importance_criteria, basestring)
  */
   __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3188,17 +3188,25 @@ static int __pyx_pf_7pyearth_8_pruning_13PruningPasser___init__(struct __pyx_obj
   /* "pyearth/_pruning.pyx":41
  *         # feature importance
  *         feature_importance_criteria = kwargs.get("feature_importance_type", [])
- *         if isinstance(feature_importance_criteria, basestring):             # <<<<<<<<<<<<<<
+ *         try:
+ *             is_str = isinstance(feature_importance_criteria, basestring)
+ *         except NameError:
+ *             is_str = isinstance(feature_importance_criteria, str)
+ *         if is_str:             # <<<<<<<<<<<<<<
  *             feature_importance_criteria = [feature_importance_criteria]
  *         self.feature_importance = dict()
  */
-  __pyx_t_8 = __Pyx_PyBaseString_Check(__pyx_v_feature_importance_criteria); 
+#if PY_MAJOR_VERSION < 3
+  __pyx_t_8 = __Pyx_PyBaseString_Check(__pyx_v_feature_importance_criteria);
+#else
+  __pyx_t_8 = PyUnicode_Check(__pyx_v_feature_importance_criteria);
+#endif
   __pyx_t_9 = (__pyx_t_8 != 0);
   if (__pyx_t_9) {
 
     /* "pyearth/_pruning.pyx":42
  *         feature_importance_criteria = kwargs.get("feature_importance_type", [])
- *         if isinstance(feature_importance_criteria, basestring):
+ *         if is_str:
  *             feature_importance_criteria = [feature_importance_criteria]             # <<<<<<<<<<<<<<
  *         self.feature_importance = dict()
  *         for criterion in feature_importance_criteria:
@@ -3214,14 +3222,18 @@ static int __pyx_pf_7pyearth_8_pruning_13PruningPasser___init__(struct __pyx_obj
     /* "pyearth/_pruning.pyx":41
  *         # feature importance
  *         feature_importance_criteria = kwargs.get("feature_importance_type", [])
- *         if isinstance(feature_importance_criteria, basestring):             # <<<<<<<<<<<<<<
+ *         try:
+ *             is_str = isinstance(feature_importance_criteria, basestring)
+ *         except NameError:
+ *             is_str = isinstance(feature_importance_criteria, str)
+ *         if is_str:             # <<<<<<<<<<<<<<
  *             feature_importance_criteria = [feature_importance_criteria]
  *         self.feature_importance = dict()
  */
   }
 
   /* "pyearth/_pruning.pyx":43
- *         if isinstance(feature_importance_criteria, basestring):
+ *         if is_str:
  *             feature_importance_criteria = [feature_importance_criteria]
  *         self.feature_importance = dict()             # <<<<<<<<<<<<<<
  *         for criterion in feature_importance_criteria:
