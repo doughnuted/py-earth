@@ -1,5 +1,3 @@
-
-
 class TestUtil(object):
 
     def __init__(self):
@@ -8,6 +6,8 @@ class TestUtil(object):
     def test(self):
         pass
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     import nose
-    nose.run(argv=[__file__, '-s', '-v'])
+
+    nose.run(argv=[__file__, "-s", "-v"])
