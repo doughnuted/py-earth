@@ -270,7 +270,9 @@ cdef class ForwardPasser:
         cdef INDEX_t endspan
         cdef bint linear_dependence
         cdef bint dependent
-        # TODO: Shouldn't there be weights here?
+        # The adjustment term uses the number of training samples.
+        # Sample weights are already reflected in mse_ via
+        # self.outcome.mse(), so no weighting is needed here.
         cdef FLOAT_t gcv_factor_k_plus_1 = gcv_adjust(k + 1, self.m,
                                                       self.penalty)
         cdef FLOAT_t gcv_factor_k_plus_2 = gcv_adjust(k + 2, self.m,
