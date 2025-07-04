@@ -3174,7 +3174,7 @@ static int __pyx_pf_7pyearth_8_pruning_13PruningPasser___init__(struct __pyx_obj
  * 
  *         # feature importance
  *         feature_importance_criteria = kwargs.get("feature_importance_type", [])             # <<<<<<<<<<<<<<
- *         if isinstance(feature_importance_criteria, basestring):
+ *         if isinstance(feature_importance_criteria, str):
  *             feature_importance_criteria = [feature_importance_criteria]
  */
   __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
@@ -3188,7 +3188,7 @@ static int __pyx_pf_7pyearth_8_pruning_13PruningPasser___init__(struct __pyx_obj
   /* "pyearth/_pruning.pyx":41
  *         # feature importance
  *         feature_importance_criteria = kwargs.get("feature_importance_type", [])
- *         if isinstance(feature_importance_criteria, basestring):             # <<<<<<<<<<<<<<
+ *         if isinstance(feature_importance_criteria, str):             # <<<<<<<<<<<<<<
  *             feature_importance_criteria = [feature_importance_criteria]
  *         self.feature_importance = dict()
  */
@@ -3198,7 +3198,7 @@ static int __pyx_pf_7pyearth_8_pruning_13PruningPasser___init__(struct __pyx_obj
 
     /* "pyearth/_pruning.pyx":42
  *         feature_importance_criteria = kwargs.get("feature_importance_type", [])
- *         if isinstance(feature_importance_criteria, basestring):
+ *         if isinstance(feature_importance_criteria, str):
  *             feature_importance_criteria = [feature_importance_criteria]             # <<<<<<<<<<<<<<
  *         self.feature_importance = dict()
  *         for criterion in feature_importance_criteria:
@@ -3214,14 +3214,14 @@ static int __pyx_pf_7pyearth_8_pruning_13PruningPasser___init__(struct __pyx_obj
     /* "pyearth/_pruning.pyx":41
  *         # feature importance
  *         feature_importance_criteria = kwargs.get("feature_importance_type", [])
- *         if isinstance(feature_importance_criteria, basestring):             # <<<<<<<<<<<<<<
+ *         if isinstance(feature_importance_criteria, str):             # <<<<<<<<<<<<<<
  *             feature_importance_criteria = [feature_importance_criteria]
  *         self.feature_importance = dict()
  */
   }
 
   /* "pyearth/_pruning.pyx":43
- *         if isinstance(feature_importance_criteria, basestring):
+ *         if isinstance(feature_importance_criteria, str):
  *             feature_importance_criteria = [feature_importance_criteria]
  *         self.feature_importance = dict()             # <<<<<<<<<<<<<<
  *         for criterion in feature_importance_criteria:
