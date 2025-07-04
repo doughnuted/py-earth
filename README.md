@@ -31,6 +31,16 @@ cd py-earth
 sudo python setup.py install
 ```
 
+## Running Tests
+
+If you plan to run the unit tests, compile the C extensions first so that
+`pytest` can import the compiled modules:
+
+```bash
+python setup.py build_ext --inplace  # or `make inplace`
+pytest
+```
+
 ## Usage
 ```python
 import numpy
