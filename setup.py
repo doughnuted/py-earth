@@ -130,7 +130,6 @@ def setup_package():
         'install_requires': [
             'scipy >= 0.16',
             'scikit-learn >= 0.16',
-            'six'
             ],
         'extras_require': {'docs': ['sphinx_gallery'],
                            'dev': ['cython'],
