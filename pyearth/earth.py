@@ -323,7 +323,6 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
         self.enable_pruning = enable_pruning
         self.feature_importance_type = feature_importance_type
         self.verbose = verbose
-        self._version = __version__
 
     def __eq__(self, other):
         if self.__class__ is not other.__class__:
@@ -399,7 +398,10 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
             raise TypeError('A sparse matrix was passed, but dense data '
                             'is required. Use X.toarray() to convert to '
                             'dense.')
-        X = np.asarray(X, dtype=np.float64, order='F')
+        X_arr = np.asarray(X)
+        if np.asarray(X_arr).dtype.kind == 'c':
+            raise ValueError('Complex data not supported')
+        X = np.asarray(X_arr, dtype=np.float64, order='F')
         
         # Figure out missingness
         missing_is_nan = False
@@ -464,8 +466,11 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
         # Handle X separately
         X, missing = self._scrub_x(X, missing, **kwargs)
 
+        y_arr = np.asarray(y)
+        if y_arr.dtype.kind == 'c':
+            raise ValueError('Complex data not supported')
         # Convert y to internally used data type
-        y = np.asarray(y, dtype=np.float64)
+        y = y_arr.astype(np.float64)
         assert_all_finite(y)
 
         if len(y.shape) == 1:
@@ -498,6 +503,13 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
                 sample_weight = np.repeat(sample_weight, y.shape[1], axis=1)
         if output_weight is not None:
             sample_weight *= output_weight
+
+        # Remove samples with zero weight to ensure invariance
+        mask = np.any(sample_weight != 0, axis=1)
+        X = X[mask]
+        y = y[mask]
+        sample_weight = sample_weight[mask]
+        missing = missing[mask]
 
         # Make sure everything is finite (except X, which is allowed to have
         # missing values)
