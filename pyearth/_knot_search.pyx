@@ -5,7 +5,6 @@
 # cython: profile = True
 cimport cython
 import numpy as np
-import scipy as sp
 from libc.math cimport sqrt
 from libc.math cimport log
 cimport numpy as cnp
