@@ -9,7 +9,7 @@ from libc.math cimport log
 from libc.math cimport abs
 cimport cython
 cdef FLOAT_t ZERO_TOL = 1e-16
-from _types import FLOAT
+from ._types import FLOAT
 import numpy as np
 import sys
 import six
@@ -489,7 +489,7 @@ cdef class DataVariableBasisFunction(VariableBasisFunction):
         cdef cnp.ndarray[FLOAT_t, ndim=1] val
         if recurse:
             self.parent.apply(X, missing, b, recurse=True)
-        val = np.zeros(X.shape[0], dtype=FLOAT)
+        val = np.zeros(X.shape[0], dtype=np.float64)
         here =  missing[:, self.variable] == 0
         val[here] = self.eval(X[here, self.variable])
         for i in range(m):
@@ -511,8 +511,8 @@ cdef class DataVariableBasisFunction(VariableBasisFunction):
         cdef FLOAT_t x
         self.parent.apply_deriv(X, missing, b, j, var)
         here =  missing[:, self.variable] == 0
-        this_val = np.zeros(X.shape[0], dtype=FLOAT)
-        this_deriv = np.zeros(X.shape[0], dtype=FLOAT)
+        this_val = np.zeros(X.shape[0], dtype=np.float64)
+        this_deriv = np.zeros(X.shape[0], dtype=np.float64)
         this_val[here] = self.eval(X[here,this_var])
         this_deriv[here] = self.eval_deriv(X[here,this_var])
         for i in range(m):
