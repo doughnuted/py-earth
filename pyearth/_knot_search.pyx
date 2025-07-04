@@ -162,11 +162,14 @@ cdef class SingleOutcomeDependentData:
     
     cpdef FLOAT_t sse(SingleOutcomeDependentData self):
         '''
-        Return the weighted mean squared error for the linear least squares problem
-        represented by Q_t, y, and w.
+        Return the weighted sum of squared errors for the linear least squares
+        problem represented by ``Q_t``, ``y`` and ``w``.
+
+        ``self.sse_`` stores the same quantity and is updated in ``update``.
+        Squaring is unnecessary here as the objective is already a sum of
+        squares.
         '''
-        # TODO: Why is this squared?
-        return ((self.omega - np.dot(self.theta, self.theta)) ** 2)# / np.sum(self.w)
+        return self.omega - np.dot(self.theta, self.theta)
     
 #     cpdef int update_from_basis_function(OutcomeDependentData self, BasisFunction bf, FLOAT_t[:,:] X, 
 #                                          BOOL_t[:,:] missing, FLOAT_t zero_tol) except *:
