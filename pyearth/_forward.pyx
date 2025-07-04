@@ -5,9 +5,9 @@
 # cython: profile = False
 
 from ._util cimport gcv_adjust, log2, apply_weights_1d, apply_weights_slice
-from ._basis cimport (Basis, BasisFunction, ConstantBasisFunction,
-                      HingeBasisFunction, LinearBasisFunction, 
-                      MissingnessBasisFunction)
+from _basis cimport (Basis, BasisFunction, ConstantBasisFunction,
+                     HingeBasisFunction, LinearBasisFunction,
+                     MissingnessBasisFunction)
 from ._record cimport ForwardPassIteration
 from ._types import BOOL, INT
 from ._knot_search cimport knot_search, MultipleOutcomeDependentData, PredictorDependentData, \

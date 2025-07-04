@@ -1,5 +1,6 @@
 from setuptools import setup, Extension, find_packages
 import sys
+import os
 import codecs
 import versioneer
 
@@ -15,6 +16,7 @@ def get_ext_modules():
     # Find all includes
     local_inc = 'pyearth'
     numpy_inc = numpy.get_include()
+    numpy_pxd = os.path.dirname(numpy.__file__)
 
     # Set up the ext_modules for Cython or not, depending
     if cythonize_switch:
@@ -25,7 +27,8 @@ def get_ext_modules():
              Extension(
                  "pyearth._basis",
                  ["pyearth/_basis.pyx"],
-                 include_dirs=[numpy_inc]),
+                 include_dirs=[local_inc,
+                               numpy_inc]),
              Extension(
                  "pyearth._record",
                  ["pyearth/_record.pyx"],
@@ -55,14 +58,16 @@ def get_ext_modules():
                  ["pyearth/_types.pyx"],
                  include_dirs=[local_inc,
                                numpy_inc])
-             ])
+            ],
+            include_path=[local_inc, numpy_pxd])
     else:
         ext_modules = [Extension(
             "pyearth._util", ["pyearth/_util.c"], include_dirs=[numpy_inc]),
             Extension(
                 "pyearth._basis",
                 ["pyearth/_basis.c"],
-                include_dirs=[numpy_inc]),
+                include_dirs=[local_inc,
+                              numpy_inc]),
             Extension(
                 "pyearth._record",
                 ["pyearth/_record.c"],
