@@ -10,7 +10,7 @@ from pyearth._types import BOOL
 from pyearth.test.testing_utils import if_pandas,\
     if_sympy
 from itertools import product
-from numpy.testing.utils import assert_array_almost_equal
+from numpy.testing import assert_array_almost_equal
 
 numpy.random.seed(0)
 
@@ -49,8 +49,9 @@ def test_export_python_string():
     for smooth in (True, False):
         model = Earth(penalty=1, smooth=smooth, max_degree=2).fit(X, y)
         export_model = export_python_string(model, 'my_test_model')
-        six.exec_(export_model, globals())
-        for exp_pred, model_pred in zip(model.predict(X), my_test_model(X)):
+        ns = dict(globals(), np=numpy)
+        exec(export_model, ns)
+        for exp_pred, model_pred in zip(model.predict(X), ns['my_test_model'](X)):
             assert_almost_equal(exp_pred, model_pred)
 
 @if_pandas

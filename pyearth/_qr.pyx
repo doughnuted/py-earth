@@ -7,7 +7,7 @@ import numpy as np
 from scipy.linalg.cython_lapack cimport dlarfg, dlarft, dlarfb
 from scipy.linalg.cython_blas cimport dcopy
 from libc.math cimport abs
-from _types import BOOL, FLOAT
+from ._types import BOOL, FLOAT
 
 cdef class UpdatingQT:
     def __init__(UpdatingQT self, int m, int max_n, Householder householder, 
@@ -23,7 +23,7 @@ cdef class UpdatingQT:
     @classmethod
     def alloc(cls, int m, int max_n, FLOAT_t zero_tol):
         cdef Householder householder = Householder.alloc(m, max_n, zero_tol)
-        cdef FLOAT_t[::1, :] Q_t = np.empty(shape=(max_n, m), dtype=FLOAT, order='F')
+        cdef FLOAT_t[::1, :] Q_t = np.empty(shape=(max_n, m), dtype=np.float64, order='F')
         cdef BOOL_t[::1] dependent_cols = np.empty(shape=max_n, dtype=BOOL, order='F')
         return cls(m, max_n, householder, 0, Q_t, zero_tol, dependent_cols)
     
@@ -102,11 +102,11 @@ cdef class Householder:
     @classmethod
     def alloc(cls, int m, int max_n, FLOAT_t zero_tol):
         cdef int k = 0
-        cdef FLOAT_t[::1, :] V = np.empty(shape=(m, max_n), dtype=FLOAT, order='F')
-        cdef FLOAT_t[::1, :] T = np.empty(shape=(max_n, max_n), dtype=FLOAT, order='F')
-        cdef FLOAT_t[::1] tau = np.empty(shape=max_n, dtype=FLOAT, order='F')
-        cdef FLOAT_t[::1] beta = np.empty(shape=max_n, dtype=FLOAT, order='F')
-        cdef FLOAT_t[::1, :] work = np.empty(shape=(m, max_n), dtype=FLOAT, order='F')
+        cdef FLOAT_t[::1, :] V = np.empty(shape=(m, max_n), dtype=np.float64, order='F')
+        cdef FLOAT_t[::1, :] T = np.empty(shape=(max_n, max_n), dtype=np.float64, order='F')
+        cdef FLOAT_t[::1] tau = np.empty(shape=max_n, dtype=np.float64, order='F')
+        cdef FLOAT_t[::1] beta = np.empty(shape=max_n, dtype=np.float64, order='F')
+        cdef FLOAT_t[::1, :] work = np.empty(shape=(m, max_n), dtype=np.float64, order='F')
         return cls(k, m, max_n, V, T, tau, beta, work, zero_tol)
     
     cpdef void downdate(Householder self):
@@ -198,7 +198,7 @@ cdef class Householder:
         cdef int ldc = C.strides[1] // C.itemsize
         cdef FLOAT_t * work = <FLOAT_t *> &(self.work[0,0])
         cdef int ldwork = self.m
-        print C.shape
+        print(C.shape)
         dlarfb(&side, &trans, &direct, &storev, &M, &N, &K, 
                V, &ldv, T, &ldt, C_arg, &ldc, work, &ldwork)
         

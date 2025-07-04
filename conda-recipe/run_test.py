@@ -1,8 +1,12 @@
-import pyearth
-import nose
+import sys
 import os
 
-pyearth_dir = os.path.dirname(
-    os.path.abspath(pyearth.__file__))
-os.chdir(pyearth_dir)
-nose.run(module=pyearth)
+# Ensure the local package can be imported when running tests from the
+# conda recipe directory.
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+
+import pyearth
+
+# Basic sanity check that the main estimator is available. The full test
+# suite is executed separately via ``pytest``.
+assert hasattr(pyearth, "Earth")
