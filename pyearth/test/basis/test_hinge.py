@@ -12,7 +12,7 @@ from pyearth._basis import (HingeBasisFunction, SmoothedHingeBasisFunction,
 class Container(BaseContainer):
 
     def __init__(self):
-        super(Container, self).__init__()
+        super().__init__()
         self.parent = ConstantBasisFunction()
         self.bf = HingeBasisFunction(self.parent, 1.0, 10, 1, False)
 
