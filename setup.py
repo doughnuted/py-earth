@@ -21,7 +21,7 @@ def get_ext_modules():
         from Cython.Build import cythonize
         ext_modules = cythonize(
             [Extension(
-                "pyearth._util", ["pyearth/_util.pyx"], include_dirs=[numpy_inc]),
+            "pyearth._util", ["pyearth/_util.pyx"], include_dirs=[local_inc, numpy_inc]),
              Extension(
                  "pyearth._basis",
                  ["pyearth/_basis.pyx"],
@@ -58,7 +58,7 @@ def get_ext_modules():
              ])
     else:
         ext_modules = [Extension(
-            "pyearth._util", ["pyearth/_util.c"], include_dirs=[numpy_inc]),
+            "pyearth._util", ["pyearth/_util.c"], include_dirs=[local_inc, numpy_inc]),
             Extension(
                 "pyearth._basis",
                 ["pyearth/_basis.c"],
@@ -118,25 +118,28 @@ def setup_package():
                         'Operating System :: Unix',
                         'Programming Language :: Cython',
                         'Programming Language :: Python',
-                        'Programming Language :: Python :: 2',
-                        'Programming Language :: Python :: 2.6',
-                        'Programming Language :: Python :: 2.7',
                         'Programming Language :: Python :: 3',
-                        'Programming Language :: Python :: 3.4',
-                        'Programming Language :: Python :: 3.5',
-                        'Programming Language :: Python :: 3.6',
+                        'Programming Language :: Python :: 3 :: Only',
+                        'Programming Language :: Python :: 3.8',
+                        'Programming Language :: Python :: 3.9',
+                        'Programming Language :: Python :: 3.10',
+                        'Programming Language :: Python :: 3.11',
+                        # Python 3.12 removed longintrepr.h which our
+                        # Cython extensions rely on. Exclude 3.12 until fixed.
                         'Topic :: Scientific/Engineering',
                         'Topic :: Software Development'],
         'install_requires': [
-            'scipy >= 0.16',
-            'scikit-learn >= 0.16',
-            'six'
+            'numpy>=1.22',
+            'scipy>=1.9',
+            'scikit-learn>=1.4',
+            'six>=1.17'
             ],
         'extras_require': {'docs': ['sphinx_gallery'],
                            'dev': ['cython'],
                            'export': ['sympy'],
                            'all_tests': ['pandas', 'statsmodels', 'patsy', 'sympy']},
-        'setup_requires': ['numpy'],
+        'setup_requires': ['numpy>=1.22'],
+        'python_requires': '>=3.8, <3.12',
         'include_package_data': True
     }
 
