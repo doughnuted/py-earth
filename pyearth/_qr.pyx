@@ -4,10 +4,13 @@
 # cython: wraparound = False
 # cython: profile = False
 import numpy as np
+cimport numpy as cnp
 from scipy.linalg.cython_lapack cimport dlarfg, dlarft, dlarfb
 from scipy.linalg.cython_blas cimport dcopy
 from libc.math cimport abs
+from _types cimport BOOL_t, FLOAT_t
 from _types import BOOL, FLOAT
+cnp.import_array()
 
 cdef class UpdatingQT:
     def __init__(UpdatingQT self, int m, int max_n, Householder householder, 
@@ -198,7 +201,7 @@ cdef class Householder:
         cdef int ldc = C.strides[1] // C.itemsize
         cdef FLOAT_t * work = <FLOAT_t *> &(self.work[0,0])
         cdef int ldwork = self.m
-        print C.shape
+        # Removed debug print that caused invalid syntax in Python 3
         dlarfb(&side, &trans, &direct, &storev, &M, &N, &K, 
                V, &ldv, T, &ldt, C_arg, &ldc, work, &ldwork)
         
