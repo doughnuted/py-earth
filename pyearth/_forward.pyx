@@ -158,7 +158,7 @@ cdef class ForwardPasser:
         self.record = ForwardPassRecord(
             self.m, self.n, self.penalty, self.outcome.mse(), self.xlabels)
         
-    cpdef Basis get_basis(ForwardPasser self):
+    cpdef get_basis(ForwardPasser self):
         return self.basis
 
     cpdef init_linear_variables(ForwardPasser self):
