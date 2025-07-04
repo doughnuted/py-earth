@@ -7,8 +7,8 @@ from sklearn.utils.validation import (assert_all_finite, check_is_fitted,
                                       check_X_y)
 import numpy as np
 from scipy import sparse
-from ._version import get_versions
-__version__ = get_versions()['version']
+# Expose library version for reproducibility
+__version__ = '0.1'
 
 class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
 
