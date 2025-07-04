@@ -22,10 +22,11 @@ def get_ext_modules():
         ext_modules = cythonize(
             [Extension(
                 "pyearth._util", ["pyearth/_util.pyx"], include_dirs=[numpy_inc]),
-             Extension(
-                 "pyearth._basis",
-                 ["pyearth/_basis.pyx"],
-                 include_dirs=[numpy_inc]),
+            Extension(
+                "pyearth._basis",
+                ["pyearth/_basis.pyx"],
+                include_dirs=[local_inc,
+                              numpy_inc]),
              Extension(
                  "pyearth._record",
                  ["pyearth/_record.pyx"],
@@ -62,7 +63,8 @@ def get_ext_modules():
             Extension(
                 "pyearth._basis",
                 ["pyearth/_basis.c"],
-                include_dirs=[numpy_inc]),
+                include_dirs=[local_inc,
+                              numpy_inc]),
             Extension(
                 "pyearth._record",
                 ["pyearth/_record.c"],

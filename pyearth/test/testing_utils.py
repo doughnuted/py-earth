@@ -1,6 +1,6 @@
 import os
 from functools import wraps
-from nose import SkipTest
+import pytest
 from nose.tools import assert_almost_equal
 from distutils.version import LooseVersion
 import sys
@@ -13,8 +13,7 @@ def if_environ_has(var_name):
             if var_name in os.environ:
                 return func(*args, **kwargs)
             else:
-                raise SkipTest('Only run if %s environment variable is '
-                               'defined.' % var_name)
+                pytest.skip('Only run if %s environment variable is defined.' % var_name)
         return run_test
     return if_environ
 
@@ -22,7 +21,7 @@ def if_platform_not_win_32(func):
     @wraps(func)
     def run_test(*args, **kwargs):
         if sys.platform == 'win32':
-            raise SkipTest('Skip for 32 bit Windows platforms.')
+            pytest.skip('Skip for 32 bit Windows platforms.')
         else:
             return func(*args, **kwargs)
     return run_test
@@ -37,8 +36,7 @@ def if_sklearn_version_greater_than_or_equal_to(min_version):
         def run_test(*args, **kwargs):
             import sklearn
             if LooseVersion(sklearn.__version__) < LooseVersion(min_version):
-                raise SkipTest('sklearn version less than %s' %
-                               str(min_version))
+                pytest.skip('sklearn version less than %s' % str(min_version))
             else:
                 return func(*args, **kwargs)
         return run_test
@@ -53,7 +51,7 @@ def if_statsmodels(func):
         try:
             import statsmodels
         except ImportError:
-            raise SkipTest('statsmodels not available.')
+            pytest.skip('statsmodels not available.')
         else:
             return func(*args, **kwargs)
     return run_test
@@ -67,7 +65,7 @@ def if_pandas(func):
         try:
             import pandas
         except ImportError:
-            raise SkipTest('pandas not available.')
+            pytest.skip('pandas not available.')
         else:
             return func(*args, **kwargs)
     return run_test
@@ -80,7 +78,7 @@ def if_sympy(func):
         try:
             from sympy import Symbol, Add, Mul, Max, RealNumber, Piecewise, sympify, Pow, And, lambdify
         except ImportError:
-            raise SkipTest('sympy not available.')
+            pytest.skip('sympy not available.')
         else:
             return func(*args, **kwargs)
     return run_test
@@ -95,7 +93,7 @@ def if_patsy(func):
         try:
             import patsy
         except ImportError:
-            raise SkipTest('patsy not available.')
+            pytest.skip('patsy not available.')
         else:
             return func(*args, **kwargs)
     return run_test
