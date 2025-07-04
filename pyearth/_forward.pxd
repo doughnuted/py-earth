@@ -1,9 +1,9 @@
 cimport numpy as cnp
 import numpy as np
-from _types cimport FLOAT_t, INT_t, INDEX_t, BOOL_t
-from _basis cimport Basis
-from _record cimport ForwardPassRecord
-from _knot_search cimport MultipleOutcomeDependentData
+from pyearth._types cimport FLOAT_t, INT_t, INDEX_t, BOOL_t
+from pyearth._basis cimport Basis
+from pyearth._record cimport ForwardPassRecord
+from pyearth._knot_search cimport MultipleOutcomeDependentData
 
 # cdef dict stopping_conditions
 
@@ -72,7 +72,7 @@ cdef class ForwardPasser:
     cdef ForwardPassRecord record
     cdef Basis basis
 
-    cpdef Basis get_basis(ForwardPasser self)
+    cpdef get_basis(ForwardPasser self)
 
     cpdef init_linear_variables(ForwardPasser self)
 
