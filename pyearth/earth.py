@@ -23,6 +23,8 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
     A hinge function is a function that's equal to its argument where that
     argument is greater than zero and is zero everywhere else.
 
+    Requires **Python 3.8+** and **SciPy 1.10+**.
+
     The multivariate adaptive regression splines algorithm has two stages.
     First, the forward pass searches for terms in the truncated power spline
     basis that locally minimize the squared error loss of the training set.
