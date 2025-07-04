@@ -1,0 +1,4 @@
+- py-earth now requires SciPy 1.10 or newer.
+  Upgrade SciPy with `pip install -U scipy` or `conda update scipy` before
+  reinstalling the package.  Clean any existing build artifacts with
+  `python setup.py clean` if upgrading from an older environment.
