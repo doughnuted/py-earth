@@ -129,8 +129,7 @@ def setup_package():
                         'Topic :: Software Development'],
         'install_requires': [
             'scipy >= 0.16',
-            'scikit-learn >= 0.16',
-            'six'
+            'scikit-learn >= 0.16'
             ],
         'extras_require': {'docs': ['sphinx_gallery'],
                            'dev': ['cython'],
