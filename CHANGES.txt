@@ -1,0 +1,1 @@
+* update SciPy requirement to >=1.10 and align version metadata with 0.1

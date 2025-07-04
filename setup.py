@@ -99,7 +99,7 @@ def setup_package():
     # Create a dictionary of arguments for setup
     setup_args = {
         'name': 'sklearn-contrib-py-earth',
-        'version': versioneer.get_version(),
+        'version': '0.1',
         'author': 'Jason Rudy',
         'author_email': 'jcrudy@gmail.com',
         'packages': find_packages(),
@@ -128,7 +128,7 @@ def setup_package():
                         'Topic :: Scientific/Engineering',
                         'Topic :: Software Development'],
         'install_requires': [
-            'scipy >= 0.16',
+            'scipy >= 1.10',
             'scikit-learn >= 0.16',
             'six'
             ],
