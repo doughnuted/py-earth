@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 88
+exclude = "(benchmarks|pyearth/.*\\.(c|pyx|pyxdep)|pyearth/.*\\.c)"
+
+[tool.ruff]
+line-length = 88
+exclude = ["benchmarks", "pyearth/*.c", "pyearth/*.pyx", "pyearth/*.pyxdep"]
+
+[tool.ruff.lint]
+select = ["E", "F"]
+per-file-ignores = {"__init__.py" = ["F401"]}
