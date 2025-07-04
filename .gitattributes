@@ -1,1 +1,3 @@
 pyearth/_version.py export-subst
+# Generated files
+pyearth/*.c linguist-generated
