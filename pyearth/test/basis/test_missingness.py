@@ -12,7 +12,7 @@ from pyearth._basis import (
 class Container(BaseContainer):
 
     def __init__(self):
-        super(Container, self).__init__()
+        super().__init__()
         self.parent = ConstantBasisFunction()
         self.bf = MissingnessBasisFunction(self.parent, 1, True)
         self.child = HingeBasisFunction(self.bf, 1.0, 10, 1, False)
