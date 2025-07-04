@@ -15,7 +15,7 @@ clean:
 	rm -f pyearth/*.c pyearth/*.so pyearth/*.pyc pyearth/test/*.pyc pyearth/test/basis/*.pyc pyearth/test/record/*.pyc
 
 %.c: %.pyx
-	$(CYTHON) $<
+	$(CYTHON) -3 -I pyearth -I $(shell $(PYTHON) -c 'import scipy, pathlib; print(pathlib.Path(scipy.__path__[0]))') $<
 
 test: inplace
 	$(NOSETESTS) -s pyearth
