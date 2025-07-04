@@ -31,6 +31,20 @@ cd py-earth
 sudo python setup.py install
 ```
 
+## Running the Tests
+
+Before running the test suite the Cython extension modules must be built in
+place so that they are importable by `pytest`:
+
+```bash
+pip install .[all_tests]
+python setup.py build_ext --inplace --cythonize
+pytest -v
+```
+
+Running the tests from the repository root ensures compiled extensions such as
+`pyearth._forward` are available on the Python path.
+
 ## Usage
 ```python
 import numpy
