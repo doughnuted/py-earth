@@ -11,7 +11,7 @@ from pyearth._basis import (HingeBasisFunction, SmoothedHingeBasisFunction,
 class Container(BaseContainer):
 
     def __init__(self):
-        super(Container, self).__init__()
+        super().__init__()
         self.basis = Basis(self.X.shape[1])
         self.parent = ConstantBasisFunction()
         self.bf1 = HingeBasisFunction(self.parent, 1.0, 10, 1, False)
