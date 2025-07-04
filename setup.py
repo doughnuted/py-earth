@@ -128,7 +128,7 @@ def setup_package():
                         'Topic :: Scientific/Engineering',
                         'Topic :: Software Development'],
         'install_requires': [
-            'scipy >= 0.16',
+            'scipy >= 1.6',
             'scikit-learn >= 0.16',
             'six'
             ],
