@@ -6,6 +6,7 @@
 import numpy as np
 from scipy.linalg.cython_lapack cimport dlarfg, dlarft, dlarfb
 from scipy.linalg.cython_blas cimport dcopy
+from scipy.linalg import blas
 from libc.math cimport abs
 from _types import BOOL, FLOAT
 
@@ -157,26 +158,25 @@ cdef class Householder:
         if dependent:
             return dependent
         
-        # Add the new householder reflection to the 
-        # block reflector
-        # TODO: Currently requires recalculating all of T
-        # Could be updated to use BLAS instead to calculate 
-        # just the new column of T.  I'm not sure how to 
-        # do this or whether it would be faster.
+        # Add the new householder reflection to the block reflector.
+        # Previously the entire ``T`` matrix was recomputed using ``dlarft``.
+        # Here we update only the new column with BLAS routines.
         self.V[self.k, self.k] = 1.
         self.V[:self.k, self.k] = 0.
         self.tau[self.k] = tau
         self.beta[self.k] = alpha
-        cdef char direct = 'F'
-        cdef char storev = 'C'
-        n = self.m
-        cdef int k = self.k + 1
-        cdef FLOAT_t * V = <FLOAT_t *> &(self.V[0,0])
-        cdef int ldv = self.m
-        cdef FLOAT_t * T = <FLOAT_t *> &(self.T[0,0])
-        cdef FLOAT_t * tau_arg = <FLOAT_t *> &(self.tau[0])
-        cdef int ldt = self.max_n
-        dlarft(&direct, &storev, &n, &k, V, &ldv, tau_arg, T, &ldt)
+
+        cdef int kk = self.k
+        if kk > 0:
+            cdef FLOAT_t[::1] w = self.work[:kk, 0]
+            w[:] = 0.
+            blas.dgemv(1.0, self.V[kk:, :kk], self.V[kk:, kk], 0.0, w, trans=1)
+            blas.dscal(-tau, w)
+            blas.dtrmv(self.T[:kk, :kk], w, lower=0, trans=0, diag=0,
+                       overwrite_x=1)
+            self.T[:kk, kk] = w
+
+        self.T[kk, kk] = tau
         
         self.k += 1
         # Return beta in case the caller wants to diagnose linear dependence.
