@@ -259,7 +259,7 @@ def test_pathological_cases():
                           'endspan': 1,
                           'check_every': 1,
                           'sample_weight': 'issue_50_weight.csv'}}
-    for case, settings in cases.iteritems():
+    for case, settings in cases.items():
         data = pandas.read_csv(os.path.join(directory, case + '.csv'))
         y = data['y']
         del data['y']
