@@ -38,7 +38,7 @@ cdef class PruningPasser:
 
         # feature importance
         feature_importance_criteria = kwargs.get("feature_importance_type", [])
-        if isinstance(feature_importance_criteria, basestring):
+        if isinstance(feature_importance_criteria, str):
             feature_importance_criteria = [feature_importance_criteria]
         self.feature_importance = dict()
         for criterion in feature_importance_criteria:
