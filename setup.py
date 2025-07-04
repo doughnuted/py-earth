@@ -118,9 +118,6 @@ def setup_package():
                         'Operating System :: Unix',
                         'Programming Language :: Cython',
                         'Programming Language :: Python',
-                        'Programming Language :: Python :: 2',
-                        'Programming Language :: Python :: 2.6',
-                        'Programming Language :: Python :: 2.7',
                         'Programming Language :: Python :: 3',
                         'Programming Language :: Python :: 3.4',
                         'Programming Language :: Python :: 3.5',
@@ -128,7 +125,7 @@ def setup_package():
                         'Topic :: Scientific/Engineering',
                         'Topic :: Software Development'],
         'install_requires': [
-            'scipy >= 0.16',
+            'scipy >= 1.7',
             'scikit-learn >= 0.16',
             'six'
             ],
