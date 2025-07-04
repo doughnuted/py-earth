@@ -2,7 +2,7 @@ from pyearth._basis import (Basis, ConstantBasisFunction, HingeBasisFunction,
                             LinearBasisFunction)
 from pyearth.export import export_python_function, export_python_string,\
     export_sympy
-from nose.tools import assert_almost_equal
+import pytest
 import numpy
 import six
 from pyearth import Earth
@@ -42,7 +42,7 @@ def test_export_python_function():
         model = Earth(penalty=1, smooth=smooth, max_degree=2).fit(X, y)
         export_model = export_python_function(model)
         for exp_pred, model_pred in zip(model.predict(X), export_model(X)):
-            assert_almost_equal(exp_pred, model_pred)
+            assert exp_pred == pytest.approx(model_pred)
 
 
 def test_export_python_string():
@@ -51,7 +51,7 @@ def test_export_python_string():
         export_model = export_python_string(model, 'my_test_model')
         six.exec_(export_model, globals())
         for exp_pred, model_pred in zip(model.predict(X), my_test_model(X)):
-            assert_almost_equal(exp_pred, model_pred)
+            assert exp_pred == pytest.approx(model_pred)
 
 @if_pandas
 @if_sympy
