@@ -7,7 +7,8 @@ Created on Feb 16, 2013
 import os
 import numpy
 
-from nose.tools import assert_equal
+
+import pytest
 
 from pyearth._forward import ForwardPasser
 from pyearth._basis import (Basis, ConstantBasisFunction,
@@ -49,4 +50,4 @@ def test_run():
 #         fl.write(res)
     with open(filename, 'r') as fl:
         prev = fl.read()
-    assert_equal(res, prev)
+    assert res == prev
