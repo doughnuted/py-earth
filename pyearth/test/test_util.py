@@ -9,5 +9,5 @@ class TestUtil(object):
         pass
 
 if __name__ == '__main__':
-    import nose
-    nose.run(argv=[__file__, '-s', '-v'])
+    import pytest
+    pytest.main(['-v', __file__])

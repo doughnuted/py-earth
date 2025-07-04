@@ -1,7 +1,6 @@
 import pickle
 import numpy
-
-from nose.tools import assert_equal, assert_true
+from numpy.testing import assert_equal
 
 from .base import BaseContainer
 from pyearth._types import BOOL
@@ -71,7 +70,7 @@ def test_degree():
 def test_pickle_compatibility():
     cnt = Container()
     bf_copy = pickle.loads(pickle.dumps(cnt.bf))
-    assert_true(cnt.bf == bf_copy)
+    assert cnt.bf == bf_copy
 
 #
 # def test_smoothed_version():
