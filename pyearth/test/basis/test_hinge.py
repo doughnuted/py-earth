@@ -1,7 +1,7 @@
 import pickle
 import numpy
 
-from nose.tools import assert_equal, assert_true
+from numpy.testing import assert_equal
 
 from .base import BaseContainer
 from pyearth._types import BOOL
@@ -12,7 +12,7 @@ from pyearth._basis import (HingeBasisFunction, SmoothedHingeBasisFunction,
 class Container(BaseContainer):
 
     def __init__(self):
-        super(Container, self).__init__()
+        super().__init__()
         self.parent = ConstantBasisFunction()
         self.bf = HingeBasisFunction(self.parent, 1.0, 10, 1, False)
 
@@ -60,7 +60,7 @@ def test_degree():
 def test_pickle_compatibility():
     cnt = Container()
     bf_copy = pickle.loads(pickle.dumps(cnt.bf))
-    assert_true(cnt.bf == bf_copy)
+    assert cnt.bf == bf_copy
 
 
 def test_smoothed_version():
@@ -70,8 +70,8 @@ def test_smoothed_version():
     smoothed = cnt.bf._smoothed_version(cnt.parent, knot_dict,
                                         translation)
 
-    assert_true(type(smoothed) is SmoothedHingeBasisFunction)
-    assert_true(translation[cnt.parent] is smoothed.get_parent())
+    assert type(smoothed) is SmoothedHingeBasisFunction
+    assert translation[cnt.parent] is smoothed.get_parent()
     assert_equal(smoothed.get_knot_minus(), 0.5)
     assert_equal(smoothed.get_knot_plus(), 1.5)
     assert_equal(smoothed.get_knot(), cnt.bf.get_knot())
