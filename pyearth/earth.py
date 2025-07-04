@@ -3,8 +3,7 @@ from ._pruning import PruningPasser, FEAT_IMP_CRITERIA
 from ._util import ascii_table, apply_weights_2d, gcv
 from ._types import BOOL
 from sklearn.base import RegressorMixin, BaseEstimator, TransformerMixin
-from sklearn.utils.validation import (assert_all_finite, check_is_fitted,
-                                      check_X_y)
+from sklearn.utils.validation import (check_is_fitted, check_X_y, check_array)
 import numpy as np
 from scipy import sparse
 from ._version import get_versions
@@ -399,7 +398,10 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
             raise TypeError('A sparse matrix was passed, but dense data '
                             'is required. Use X.toarray() to convert to '
                             'dense.')
-        X = np.asarray(X, dtype=np.float64, order='F')
+
+        X = check_array(X, accept_sparse=False, dtype=np.float64, order='F',
+                        ensure_2d=False,
+                        force_all_finite=not self.allow_missing)
         
         # Figure out missingness
         missing_is_nan = False
@@ -408,13 +410,6 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
             missing = np.isnan(X)
             missing_is_nan = True
             
-        if not self.allow_missing:
-            try:
-                assert_all_finite(X)
-            except ValueError:
-                raise ValueError(
-                    "Input contains NaN, infinity or a value that's too large."
-                    "Did you mean to set allow_missing=True?")
         if X.ndim == 1:
             X = X[:, np.newaxis]
 
@@ -432,8 +427,8 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
                 X[missing] = 0.
         
         # Convert to internally used data type
-        missing = np.asarray(missing, dtype=BOOL, order='F')
-        assert_all_finite(missing)
+        missing = check_array(missing, accept_sparse=False, dtype=BOOL,
+                              order='F', ensure_2d=False)
         if missing.ndim == 1:
             missing = missing[:, np.newaxis]
         
@@ -465,8 +460,8 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
         X, missing = self._scrub_x(X, missing, **kwargs)
 
         # Convert y to internally used data type
-        y = np.asarray(y, dtype=np.float64)
-        assert_all_finite(y)
+        y = check_array(y, accept_sparse=False, dtype=np.float64,
+                        order='F', ensure_2d=False)
 
         if len(y.shape) == 1:
             y = y[:, np.newaxis]
@@ -475,14 +470,14 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
         if sample_weight is None:
             sample_weight = np.ones((y.shape[0], 1), dtype=y.dtype)
         else:
-            sample_weight = np.asarray(sample_weight, dtype=np.float64)
-            assert_all_finite(sample_weight)
+            sample_weight = check_array(sample_weight, accept_sparse=False,
+                                       dtype=np.float64, ensure_2d=False)
             if len(sample_weight.shape) == 1:
                 sample_weight = sample_weight[:, np.newaxis]
         # Deal with output_weight
         if output_weight is not None:
-            output_weight = np.asarray(output_weight, dtype=np.float64)
-            assert_all_finite(output_weight)
+            output_weight = check_array(output_weight, accept_sparse=False,
+                                       dtype=np.float64, ensure_2d=False)
 
         # Make sure dimensions match
         if y.shape[0] != X.shape[0]:
@@ -498,13 +493,6 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
                 sample_weight = np.repeat(sample_weight, y.shape[1], axis=1)
         if output_weight is not None:
             sample_weight *= output_weight
-
-        # Make sure everything is finite (except X, which is allowed to have
-        # missing values)
-        assert_all_finite(missing)
-        assert_all_finite(y)
-        assert_all_finite(sample_weight)
-        assert_all_finite(output_weight)
 
         # Make sure everything is consistent
         check_X_y(X, y, accept_sparse=False, multi_output=True,
