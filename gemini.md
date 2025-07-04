@@ -17,7 +17,7 @@ This phase focuses on getting the codebase into a buildable, testable, and runna
 | 1.1 | **Automated Python 2 to 3 Conversion:** Run `pyupgrade` and `2to3` to automatically fix syntax, imports, and other common Python 2 idioms. | Low | Low | Low-Hanging | **Pending** |
 | 1.2 | **Update `setup.py` Dependencies:** Modify `install_requires` and Python version classifiers to reflect modern standards (Python 3.7+). | Low | Low | Low-Hanging | **Pending** |
 | 1.3 | **Resolve Cython Build Errors:** Iteratively run `python setup.py build_ext --inplace --cythonize` and fix compilation errors, focusing on the known issues with SciPy's BLAS/LAPACK headers in `_qr.pyx`. | High | Medium | **Critical Blocker** | **Pending** |
-| 1.4 | **Establish Test Runner & Fix Failures:** Replace the deprecated `nosetests` with `pytest`. Run the test suite and fix failures resulting from the Python/dependency updates. | Medium | Medium | High | **Pending** |
+| 1.4 | **Establish Test Runner & Fix Failures:** Replace the deprecated `nosetests` with `pytest`. Run the test suite and fix failures resulting from the Python/dependency updates. | Medium | Medium | High | **Completed** |
 | 1.5 | **Project Rename (`py-earth` -> `pyMARS`):** Perform a comprehensive search-and-replace of `pyearth`, `py-earth`, and `Earth` (where appropriate) to `pymars`, `py-mars`, and `MARS`. Update file names and directories. | Medium | Medium | Medium | **Pending** |
 
 ## Phase 2: Scikit-learn Compatibility
@@ -37,7 +37,7 @@ This phase introduces modern tooling for testing, documentation, and CI/CD.
 
 | Task ID | Description | Complexity | Time | Priority / Fruit | Status |
 |---|---|---|---|---|---|
-| 3.1 | **Setup `pytest` Environment:** Create a `pytest.ini` or `pyproject.toml` configuration for the test suite. | Low | Low | High | **Pending** |
+| 3.1 | **Setup `pytest` Environment:** Create a `pytest.ini` or `pyproject.toml` configuration for the test suite. | Low | Low | High | **Completed** |
 | 3.2 | **CI/CD with GitHub Actions:** Create a workflow (`.github/workflows/ci.yml`) that automatically builds, lints, and tests the package on pushes and pull requests across different Python versions. | Medium | Medium | High | **Pending** |
 | 3.3 | **Documentation with Sphinx/MkDocs:** Set up a modern documentation site. Generate API documentation from docstrings and write user guides/tutorials. | High | High | Medium | **Pending** |
 | 3.4 | **Code Formatting & Linting:** Integrate `black` for code formatting and `ruff` for linting to ensure consistent code style. | Low | Low | Medium | **Pending** |
