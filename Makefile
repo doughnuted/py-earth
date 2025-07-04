@@ -1,6 +1,5 @@
 PYTHON ?= python
 CYTHON ?= cython
-NOSETESTS ?= nosetests
 CYTHONSRC=$(wildcard pyearth/*.pyx)
 CSRC=$(CYTHONSRC:.pyx=.c)
 
@@ -18,13 +17,13 @@ clean:
 	$(CYTHON) $<
 
 test: inplace
-	$(NOSETESTS) -s pyearth
+       $(PYTHON) -m pytest -s pyearth
 
 test-coverage: inplace
-	$(NOSETESTS) -s --with-coverage --cover-html --cover-html-dir=coverage --cover-package=pyearth pyearth
+       $(PYTHON) -m pytest -s --cov=pyearth --cov-report html --cov-report term pyearth
 
 verbose-test: inplace
-	$(NOSETESTS) -sv pyearth
+       $(PYTHON) -m pytest -sv pyearth
 
 conda:
 	conda-build conda-recipe
