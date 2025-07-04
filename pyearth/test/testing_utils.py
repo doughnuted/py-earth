@@ -2,7 +2,7 @@ import os
 from functools import wraps
 from nose import SkipTest
 from nose.tools import assert_almost_equal
-from distutils.version import LooseVersion
+from packaging.version import Version
 import sys
 
 def if_environ_has(var_name):
@@ -36,7 +36,7 @@ def if_sklearn_version_greater_than_or_equal_to(min_version):
         @wraps(func)
         def run_test(*args, **kwargs):
             import sklearn
-            if LooseVersion(sklearn.__version__) < LooseVersion(min_version):
+            if Version(sklearn.__version__) < Version(min_version):
                 raise SkipTest('sklearn version less than %s' %
                                str(min_version))
             else:

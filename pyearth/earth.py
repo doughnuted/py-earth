@@ -589,11 +589,7 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
             self.xlabels_ = xlabels
         if self.feature_importance_type is not None:
             feature_importance_type = self.feature_importance_type
-            try:
-                is_str = isinstance(feature_importance_type, basestring)
-            except NameError:
-                is_str = isinstance(feature_importance_type, str)
-            if is_str:
+            if isinstance(feature_importance_type, str):
                 feature_importance_type = [feature_importance_type]
             for k in feature_importance_type:
                 if k not in FEAT_IMP_CRITERIA:
