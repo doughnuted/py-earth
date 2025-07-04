@@ -51,11 +51,12 @@ def get_ext_modules():
                  include_dirs=[local_inc,
                                numpy_inc]),
              Extension(
-                 "pyearth._types",
-                 ["pyearth/_types.pyx"],
-                 include_dirs=[local_inc,
-                               numpy_inc])
-             ])
+                "pyearth._types",
+                ["pyearth/_types.pyx"],
+                include_dirs=[local_inc,
+                              numpy_inc])
+             ],
+            include_path=[local_inc])
     else:
         ext_modules = [Extension(
             "pyearth._util", ["pyearth/_util.c"], include_dirs=[numpy_inc]),
@@ -93,6 +94,11 @@ def get_ext_modules():
                 include_dirs=[local_inc,
                               numpy_inc])
         ]
+    if sys.version_info >= (3, 12):
+        for ext in ext_modules:
+            macros = dict(ext.define_macros)
+            macros['CYTHON_USE_PYLONG_INTERNALS'] = '0'
+            ext.define_macros = list(macros.items())
     return ext_modules
 
 def setup_package():
