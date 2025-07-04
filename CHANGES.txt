@@ -1,0 +1,6 @@
+0.2 (unreleased)
+----------------
+* Updated minimum required SciPy version to 1.11.
+* Installation from source now requires running
+  `python setup.py build_ext --inplace --cythonize` before `setup.py install`.
+
