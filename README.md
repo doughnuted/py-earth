@@ -31,6 +31,23 @@ cd py-earth
 sudo python setup.py install
 ```
 
+### Pre-commit hooks
+
+This repository uses [pre-commit](https://pre-commit.com/) to run `black` and `ruff`.
+Install the tooling with:
+
+```
+pip install pre-commit
+pre-commit install
+```
+
+You can run all checks on demand with:
+
+```
+pre-commit run --all-files
+```
+
+
 ## Usage
 ```python
 import numpy
