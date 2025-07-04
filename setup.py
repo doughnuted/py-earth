@@ -25,11 +25,13 @@ def get_ext_modules():
              Extension(
                  "pyearth._basis",
                  ["pyearth/_basis.pyx"],
-                 include_dirs=[numpy_inc]),
+                 include_dirs=[local_inc,
+                               numpy_inc]),
              Extension(
                  "pyearth._record",
                  ["pyearth/_record.pyx"],
-                 include_dirs=[numpy_inc]),
+                 include_dirs=[local_inc,
+                               numpy_inc]),
              Extension(
                  "pyearth._pruning",
                  ["pyearth/_pruning.pyx"],
@@ -55,7 +57,7 @@ def get_ext_modules():
                  ["pyearth/_types.pyx"],
                  include_dirs=[local_inc,
                                numpy_inc])
-             ])
+             ], language_level=3, include_path=[local_inc])
     else:
         ext_modules = [Extension(
             "pyearth._util", ["pyearth/_util.c"], include_dirs=[numpy_inc]),
