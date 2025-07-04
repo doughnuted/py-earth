@@ -40,10 +40,12 @@ as a linear combination of two hinge functions and a constant (see below).  Duri
 automatically determines which variables and basis functions to use.  
 The algorithm has two stages.  First, the 
 forward pass searches for terms that locally minimize squared error loss on the training set.  Next, a pruning pass selects a subset of those 
-terms that produces a locally minimal generalized cross-validation (GCV) score.  The GCV 
+terms that produces a locally minimal generalized cross-validation (GCV) score.  The GCV
 score is not actually based on cross-validation, but rather is meant to approximate a true
-cross-validation score by penalizing model complexity.  The final result is a set of basis functions
-that is nonlinear in the original feature space, may include interactions, and is likely to 
+cross-validation score by penalizing model complexity.  When sample weights are provided
+they influence only the mean squared error used in the GCV calculation; the adjustment term
+continues to use the number of samples.  The final result is a set of basis functions
+that is nonlinear in the original feature space, may include interactions, and is likely to
 generalize well.
 
 

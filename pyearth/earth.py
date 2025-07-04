@@ -220,7 +220,9 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
     `gcv_` : float
         The generalized cross validation (GCV) score of the model after the
         final linear fit. If sample_weight and/or output_weight are
-        given, this score is weighted appropriately.
+        given, this score is weighted appropriately.  The weighting
+        affects only the mse term; the adjustment factor uses the total
+        number of samples regardless of the weights.
 
     `grsq_` : float
         An r^2 like score based on the GCV. If sample_weight and/or
