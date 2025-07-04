@@ -5,28 +5,27 @@ package:
 source:
   git_url: https://github.com/scikit-learn-contrib/py-earth.git
 
+build:
+  skip: true  # [py2k]
+
 requirements:
   build:
-    - python
+    - python >=3
     - setuptools
     - cython
     - numpy
     - scikit-learn
-    - nose
-    - six
   run:
-    - python
+    - python >=3
     - numpy
     - scipy
     - scikit-learn
-    - six
 
 test:
   requires:
     - numpy
     - scipy
     - scikit-learn
-    - nose
   imports:
     - pyearth
 
