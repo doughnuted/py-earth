@@ -325,6 +325,18 @@ class Earth(BaseEstimator, RegressorMixin, TransformerMixin):
         self.verbose = verbose
         self._version = __version__
 
+    # ------------------------------------------------------------------
+    # Scikit-learn compatibility helpers
+    # ------------------------------------------------------------------
+    def get_params(self, deep=True):
+        """Return estimator parameters for ``GridSearchCV``."""
+        return super().get_params(deep=deep)
+
+    def set_params(self, **params):
+        """Set estimator parameters for ``GridSearchCV``."""
+        super().set_params(**params)
+        return self
+
     def __eq__(self, other):
         if self.__class__ is not other.__class__:
             return False
