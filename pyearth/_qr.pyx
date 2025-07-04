@@ -261,4 +261,3 @@ cdef class Householder:
         
         dlarfb(&side, &trans, &direct, &storev, &M, &N, &K, 
                V, &ldv, T, &ldt, C_arg, &ldc, work, &ldwork)
-#         
