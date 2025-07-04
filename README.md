@@ -23,7 +23,8 @@ If there are other features or improvements you'd like to see in py-earth, pleas
 
 ## Installation
 
-Make sure you have numpy and scikit-learn installed.  Then do the following:
+Py-earth requires **Python 3.8+** and **SciPy 1.10** or newer. Make sure you
+have numpy, SciPy and scikit-learn installed before running:
 
 ```
 git clone git://github.com/scikit-learn-contrib/py-earth.git
