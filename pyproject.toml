@@ -1,0 +1,93 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyearth_python" # Placeholder, will be the name of the submodule/eventual package
+version = "0.0.1.dev0" # Placeholder, sync with __init__.py
+description = "A Python reimplementation of Multivariate Adaptive Regression Splines (MARS)"
+readme = "README.md" # Assuming a README will be in the pyearth_python dir, or adjust
+requires-python = ">=3.8"
+license = {text = "BSD-3-Clause"} # Match original py-earth license
+authors = [
+  {name = "User", email = "user@example.com"}, # Placeholder
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "numpy>=1.20", # Specific version constraint can be refined
+    "scikit-learn>=1.0", # Specific version constraint can be refined
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0",
+    "pytest-cov>=3.0",
+]
+dev = [
+    "pyearth_python[test]", # Include test dependencies
+    "black>=23.0",
+    "flake8>=6.0",
+    "isort>=5.0",
+    "pre-commit>=3.0",
+    # "sphinx", # For docs later
+    # "sphinx-rtd-theme", # For docs later
+]
+
+[project.urls]
+Homepage = "https://github.com/user/pyearth-rewrite" # Placeholder
+Repository = "https://github.com/user/pyearth-rewrite" # Placeholder
+
+[tool.setuptools]
+packages = ["pyearth_python"] # Assumes library code is in pyearth_python directory
+
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "--cov=pyearth_python --cov-report=term-missing -ra"
+testpaths = [
+    "pyearth_python/tests",
+]
+# python_files = "test_*.py" (default)
+# python_classes = "Test*" (default)
+# python_functions = "test_*" (default)
+
+# Note: This pyproject.toml is placed at the root of the main repository.
+# If/when pyearth_python becomes a true submodule with its own repo,
+# it would have its own pyproject.toml. For now, this configures the tools
+# for development within the current structure.
+# The `packages = ["pyearth_python"]` under `tool.setuptools` assumes that
+# when building this project, the `pyearth_python` directory is the package.
+# If the intention is to build the *parent* project, this would need adjustment.
+# Given the task is to develop `pyearth_python` *within* this repo,
+# this setup allows us to treat `pyearth_python` as the primary target for packaging tools.
+# When separating, the `name` field and other metadata would specifically refer to just `pyearth_python`.
+# For now, `name = "pyearth_python"` makes sense for configuring tools like pytest coverage.
+# If the parent repo itself was a package, we'd need a different name here or a separate
+# pyproject.toml inside pyearth_python. Given the context, this single pyproject.toml
+# at the root, focusing on developing pyearth_python, is a reasonable start.
+# The `packages` directive in `[tool.setuptools]` tells setuptools to look for a package
+# in the `pyearth_python` directory.
+# The project `name` is what it would be on PyPI.

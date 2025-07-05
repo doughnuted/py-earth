@@ -1,0 +1,35 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0 # Use the latest version
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: check-added-large-files
+    -   id: check-merge-conflict
+    -   id: check-toml
+-   repo: https://github.com/psf/black
+    rev: 24.4.2 # Use the latest version compatible with your Python
+    hooks:
+    -   id: black
+        args: [--line-length=88]
+-   repo: https://github.com/PyCQA/isort
+    rev: 5.13.2 # Use the latest version
+    hooks:
+    -   id: isort
+        name: isort (python)
+        args: ["--profile", "black", "--filter-files"]
+-   repo: https://github.com/PyCQA/flake8
+    rev: 7.1.0 # Use the latest version
+    hooks:
+    -   id: flake8
+        # additional_dependencies: [flake8-bugbear] # Example of adding plugins
+        args: [--max-line-length=88, --ignore=E203,W503] # E203/W503 are often handled by/conflict with Black
+
+# To use:
+# 1. Install pre-commit: pip install pre-commit (or pipx install pre-commit)
+# 2. Install hooks: pre-commit install
+# Now hooks will run automatically before each commit.
+# You can also run them manually: pre-commit run --all-files
